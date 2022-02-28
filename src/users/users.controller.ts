@@ -7,17 +7,25 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { Observable } from 'rxjs';
+import { User } from './models/user.interface';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+const bcrypt = require("bcryptjs");
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  create(@Body() post: User): Observable<User> {
+    return this.usersService.create(post)
+
+    // createUserDto.password = await bcrypt.hash(createUserDto.password, 10)
+    // const response = await this.usersService.create(createUserDto);
+
+    // response.password = undefined;
+
+    // return response;
   }
 
   @Get()
@@ -31,7 +39,7 @@ export class UsersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  update(@Param('id') id: string, @Body() updateUserDto: any) {
     return this.usersService.update(id, updateUserDto);
   }
 

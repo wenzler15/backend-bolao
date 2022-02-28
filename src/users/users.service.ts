@@ -1,48 +1,50 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { User, UserDocument } from './entities/user.entity';
-
+import { InjectRepository } from '@nestjs/typeorm';
+import { Observable, from } from 'rxjs';
+import { Repository } from 'typeorm';
+import { UserEntity } from './models/user.entity';
+import { User } from './models/user.interface';
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>) {}
 
-  create(createUserDto: CreateUserDto) {
-    const user = new this.userModel(createUserDto);
-    return user.save();
+  create(user: User): Observable<User> {
+    return from(this.userRepository.save(user));
   }
 
   findAll() {
-    return this.userModel.find();
+    // return this.userModel.find();
   }
 
   findOne(id: string) {
-    return this.userModel.findById(id);
+    // return this.userModel.findById(id);
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return this.userModel
-      .findByIdAndUpdate(
-        {
-          _id: id,
-        },
-        {
-          $set: updateUserDto,
-        },
-        {
-          new: true,
-        },
-      )
-      .exec();
+  update(id: string, updateUserDto: string) {
+    // return this.userModel
+    //   .findByIdAndUpdate(
+    //     {
+    //       _id: id,
+    //     },
+    //     {
+    //       $set: updateUserDto,
+    //     },
+    //     {
+    //       new: true,
+    //     },
+    //   )
+    //   .exec();
   }
 
   remove(id: string) {
-    return this.userModel
-      .deleteOne({
-        _id: id,
-      })
-      .exec();
+  //   return this.userModel
+  //     .deleteOne({
+  //       _id: id,
+  //     })
+  //     .exec();
+  // }
   }
+
 }
