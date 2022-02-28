@@ -15,11 +15,11 @@ export class UsersService {
   }
 
   findAll() {
-    // return this.userModel.find();
+    return this.userRepository.find();
   }
 
   findOne(id: string) {
-    // return this.userModel.findById(id);
+    return this.userRepository.findByIds([id]);
   }
 
   update(id: string, updateUserDto: string) {
@@ -39,12 +39,7 @@ export class UsersService {
   }
 
   remove(id: string) {
-  //   return this.userModel
-  //     .deleteOne({
-  //       _id: id,
-  //     })
-  //     .exec();
-  // }
+    return this.userRepository.delete(id)
   }
 
 }
