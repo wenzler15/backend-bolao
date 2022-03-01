@@ -10,8 +10,8 @@ export class UsersService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>) {}
 
-  create(user: User): Observable<User> {
-    return from(this.userRepository.save(user));
+  async create(user: User) {
+    return this.userRepository.save(user);
   }
 
   findAll() {

@@ -17,15 +17,15 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() post: User): Observable<User> {
-    return this.usersService.create(post)
+    async create(@Body() post: User) {
+    
+    post.password = await bcrypt.hash(post.password, 10);
 
-    // createUserDto.password = await bcrypt.hash(createUserDto.password, 10)
-    // const response = await this.usersService.create(createUserDto);
+    const response = await this.usersService.create(post)
 
-    // response.password = undefined;
+    response.password = undefined;
 
-    // return response;
+    return response;
   }
 
   @Get()
