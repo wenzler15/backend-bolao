@@ -7,9 +7,21 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { subscriptionLogsToBeFn } from 'rxjs/internal/testing/TestScheduler';
+import { AuthEntity } from './models/auth.entity';
 import { User } from './models/user.interface';
 import { UsersService } from './users.service';
 const bcrypt = require("bcryptjs");
+
+@Controller('auth')
+export class UserAuth {
+  constructor(private readonly usersService: UsersService) {}
+
+  @Post()
+  async auth(@Body() body: AuthEntity) {
+    return this.usersService.auth(body);
+  }
+}
 
 @Controller('users')
 export class UsersController {
@@ -20,11 +32,7 @@ export class UsersController {
     
     post.password = await bcrypt.hash(post.password, 10);
 
-    const response = await this.usersService.create(post)
-
-    response.password = undefined;
-
-    return response;
+    return this.usersService.create(post)
   }
 
   @Get()
@@ -38,7 +46,7 @@ export class UsersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: any) {
+  update(@Param('id') id: string, @Body() updateUserDto: User) {
     return this.usersService.update(id, updateUserDto);
   }
 

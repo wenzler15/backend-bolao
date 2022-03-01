@@ -29,6 +29,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^8.0.3",
     "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.0",
     "pg": "^8.7.3",
     "prisma": "^3.9.2",
