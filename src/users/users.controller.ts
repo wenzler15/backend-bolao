@@ -7,7 +7,6 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
 import { User } from './models/user.interface';
 import { UsersService } from './users.service';
 const bcrypt = require("bcryptjs");

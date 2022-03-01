@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Observable, from } from 'rxjs';
 import { Repository } from 'typeorm';
 import { UserEntity } from './models/user.entity';
 import { User } from './models/user.interface';
+const bcrypt = require("bcryptjs");
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -14,28 +15,40 @@ export class UsersService {
     return this.userRepository.save(user);
   }
 
-  findAll() {
-    return this.userRepository.find();
+  async findAll() {
+    const response = await this.userRepository.find();
+
+    response.forEach((item) => {
+      item.password = undefined;
+    })
+
+    return response;
   }
 
-  findOne(id: string) {
-    return this.userRepository.findByIds([id]);
+  async findOne(id: string) {
+    const response = await this.userRepository.findByIds([id]);
+
+    response[0].password = undefined;
+
+    return response[0];
   }
 
-  update(id: string, updateUserDto: string) {
-    // return this.userModel
-    //   .findByIdAndUpdate(
-    //     {
-    //       _id: id,
-    //     },
-    //     {
-    //       $set: updateUserDto,
-    //     },
-    //     {
-    //       new: true,
-    //     },
-    //   )
-    //   .exec();
+  async update(id: string, updateUserDto: User) {
+    
+   const data = await this.userRepository.findOne({ where: {id}});
+
+   if(updateUserDto.password) {
+    updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
+   } 
+
+   const response = await this.userRepository.save({
+     ...data,
+     ...updateUserDto
+   });
+
+   response.password = undefined;
+
+   return response;
   }
 
   remove(id: string) {
