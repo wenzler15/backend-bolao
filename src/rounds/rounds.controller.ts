@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-var-requires */
 import {
   Controller,
   Get,
@@ -7,17 +9,19 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { Round } from './models/round.interface';
 import { RoundsService } from './rounds.service';
-import { CreateRoundDto } from './dto/create-round.dto';
-import { UpdateRoundDto } from './dto/update-round.dto';
 
 @Controller('rounds')
 export class RoundsController {
   constructor(private readonly roundsService: RoundsService) {}
 
   @Post()
-  create(@Body() createRoundDto: CreateRoundDto) {
-    return this.roundsService.create(createRoundDto);
+  async create(@Body() post: Round) {
+
+    const response = await this.roundsService.create(post);
+
+    return response;
   }
 
   @Get()
@@ -31,8 +35,8 @@ export class RoundsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRoundDto: UpdateRoundDto) {
-    return this.roundsService.update(id, updateRoundDto);
+  update(@Param('id') id: string, @Body() updateUserDto: any) {
+    return this.roundsService.update(id, updateUserDto);
   }
 
   @Delete(':id')

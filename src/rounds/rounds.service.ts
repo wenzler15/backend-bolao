@@ -1,48 +1,44 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { CreateRoundDto } from './dto/create-round.dto';
-import { UpdateRoundDto } from './dto/update-round.dto';
-import { Round, RoundDocument } from './entities/round.entity';
-
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { RoundEntity } from './models/round.entity';
+import { Round } from './models/round.interface';
 @Injectable()
 export class RoundsService {
   constructor(
-    @InjectModel(Round.name) private roundModel: Model<RoundDocument>,
+    @InjectRepository(RoundEntity)
+    private readonly roundRepository: Repository<RoundEntity>,
   ) {}
 
-  create(createRoundDto: CreateRoundDto) {
-    const round = new this.roundModel(createRoundDto);
-    return round.save();
+  async create(round: Round) {
+    return this.roundRepository.save(round);
   }
 
   findAll() {
-    return this.roundModel.find();
+    return this.roundRepository.find();
   }
 
   findOne(id: string) {
-    return this.roundModel.findById(id);
+    return this.roundRepository.findByIds([id]);
   }
 
-  update(id: string, updateRoundDto: UpdateRoundDto) {
-    return this.roundModel.findByIdAndUpdate(
-      {
-        _id: id,
-      },
-      {
-        $set: UpdateRoundDto,
-      },
-      {
-        new: true,
-      },
-    );
+  update(id: string, updateRoundDto: string) {
+    // return this.roundModel
+    //   .findByIdAndUpdate(
+    //     {
+    //       _id: id,
+    //     },
+    //     {
+    //       $set: updateRoundDto,
+    //     },
+    //     {
+    //       new: true,
+    //     },
+    //   )
+    //   .exec();
   }
 
   remove(id: string) {
-    return this.roundModel
-      .deleteOne({
-        _id: id,
-      })
-      .exec();
+    return this.roundRepository.delete(id);
   }
 }

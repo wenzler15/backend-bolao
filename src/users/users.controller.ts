@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-var-requires */
 import {
   Controller,
   Get,
@@ -7,21 +9,19 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
 import { User } from './models/user.interface';
 import { UsersService } from './users.service';
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcryptjs');
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-    async create(@Body() post: User) {
-    
+  async create(@Body() post: User) {
     post.password = await bcrypt.hash(post.password, 10);
 
-    const response = await this.usersService.create(post)
+    const response = await this.usersService.create(post);
 
     response.password = undefined;
 
