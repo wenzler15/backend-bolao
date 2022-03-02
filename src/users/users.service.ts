@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { MailService } from 'src/mail/mail.service';
 import { Repository } from 'typeorm';
 import { AuthEntity } from './models/auth.entity';
 import { UserEntity } from './models/user.entity';
 import { User } from './models/user.interface';
+const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -11,7 +13,8 @@ const jwt = require("jsonwebtoken");
 export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>) {}
+    private readonly userRepository: Repository<UserEntity>,
+    private readonly mailService: MailService) {}
 
   async create(user: User) {
     const email = user.email;
@@ -24,6 +27,8 @@ export class UsersService {
     const response = await this.userRepository.save(user);
     
     response.password = undefined;
+    response.passwordResetExpires = undefined;
+    response.passwordResetToken = undefined;
 
     return {message: "User created", user: response} 
   }
@@ -33,6 +38,8 @@ export class UsersService {
 
     response.forEach((item) => {
       item.password = undefined;
+      item.passwordResetExpires = undefined;
+      item.passwordResetToken = undefined;
     })
 
     return response;
@@ -42,6 +49,8 @@ export class UsersService {
     const response = await this.userRepository.findByIds([id]);
 
     response[0].password = undefined;
+    response[0].passwordResetExpires = undefined;
+    response[0].passwordResetToken = undefined;
 
     return response[0];
   }
@@ -62,6 +71,8 @@ export class UsersService {
   });
 
   response.password = undefined;
+  response.passwordResetExpires = undefined;
+  response.passwordResetToken = undefined;
 
   return {message: "User updated", user: response};
   }
@@ -87,6 +98,37 @@ export class UsersService {
     user.password = undefined;
 
     return {message: "User Logged", token: this.generateToken({id: user.id})};
+  }
+
+  async forgotPassword(email: string) {
+    if(!email)
+      return {message: "Please send a e-mail"}
+
+    const user = await this.userRepository.findOne({ where: {email}});
+
+    if(!user)
+      return {message: "User not found"};
+    
+    const token = crypto.randomBytes(3).toString("hex");
+    
+    const now = new Date();
+    now.setHours(now.getHours() + 1);
+
+    await this.userRepository.findOne({where: {email}});
+
+    const newInfos = user;
+
+    newInfos.passwordResetToken = token;
+    newInfos.passwordResetExpires = now;
+
+    await this.userRepository.save({
+      ...user,
+      ...newInfos
+    });
+
+    await this.mailService.sendForgotPassword(email, token);
+
+    return  {message: "Token sent"}
   }
 
   generateToken(params = {}) {

@@ -19,4 +19,10 @@ export class UserEntity {
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
     createdAt: Date;
+
+    @Column({ default: ''})
+    passwordResetToken: string;
+
+    @Column({ type: 'timestamp', nullable: true})
+    passwordResetExpires: Date;
 }

@@ -23,6 +23,16 @@ export class UserAuth {
   }
 }
 
+@Controller('forgot_password')
+export class UserForgotPassword {
+  constructor(private readonly usersService: UsersService) {}
+
+  @Post()
+  async forgotPassword(@Body() email: any) {
+    return this.usersService.forgotPassword(email.email);
+  }
+}
+
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}

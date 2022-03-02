@@ -5,4 +5,6 @@ export interface User {
     favoriteTeam?: string;
     password?: string;
     createdAt?: Date;
+    passwordResetToken?: string;
+    passwordResetExpires?: Date;
 }
