@@ -1,6 +1,6 @@
+import { SendGridService } from '@anchan828/nest-sendgrid';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MailService } from 'src/mail/mail.service';
 import { Repository } from 'typeorm';
 import { AuthEntity } from './models/auth.entity';
 import { ResetPasswordEntity } from './models/resetPassword.entity';
@@ -15,7 +15,7 @@ export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    private readonly mailService: MailService) {}
+    private readonly sendGird: SendGridService) {}
 
   async create(user: User) {
     const email = user.email;
@@ -127,7 +127,13 @@ export class UsersService {
       ...newInfos
     });
 
-    await this.mailService.sendForgotPassword(email, token);
+    await this.sendGird.send({
+      to: email,
+      from: process.env.SEND_GRID_FROM,
+      subject: "Esqueci minha senha",
+      text: "Parece que você esqueceu sua senha",
+      html: `<p>Esqueceu sua senha? Não tem problema, use esse token para redefinir sua senha: ${token} <p>`
+    });
 
     return  {message: "Token sent"}
   }

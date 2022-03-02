@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MailerModule } from '@nestjs-modules/mailer';
 import { UsersModule } from './users/users.module';
-import { MailModule } from './mail/mail.module';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { SendGridModule } from '@anchan828/nest-sendgrid';
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal: true}),
@@ -17,7 +19,9 @@ import { MailModule } from './mail/mail.module';
       synchronize: true,
     }),
     UsersModule,
-    MailModule
+    SendGridModule.forRoot({
+      apikey: process.env.SEND_GRID_KEY
+    })
   ],
   controllers: [],
   providers: [],
