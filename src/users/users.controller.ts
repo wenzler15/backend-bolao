@@ -23,6 +23,7 @@ export class UserAuth {
     return this.usersService.auth(body);
   }
 }
+
 @Controller('forgot_password')
 export class UserForgotPassword {
   constructor(private readonly usersService: UsersService) {}

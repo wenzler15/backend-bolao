@@ -167,7 +167,7 @@ export class UsersService {
 
     return {message: "Password updated!"}
   }
-
+  
   generateToken(params = {}) {
     return jwt.sign(params, "7ccd7835da99ef1dbbce76128d3ae0e7", {
       expiresIn: 86400
