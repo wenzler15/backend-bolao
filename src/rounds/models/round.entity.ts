@@ -10,6 +10,9 @@ export class RoundEntity {
   leagueId: number;
 
   @Column({ type: 'integer', default: 0 })
+  matchId: number;
+
+  @Column({ type: 'integer', default: 0 })
   round: number;
 
   @Column({ default: '' })

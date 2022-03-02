@@ -30,14 +30,15 @@ export class RoundsService {
 
       response.data.matches.forEach(async (element) => {
         const roundExists = await this.roundRepository.findOne({
-          where: { round: element.matchday },
+          where: { matchId: element.id },
         });
 
         if (roundExists) {
-          return { message: 'Round already exists' };
+          return { message: 'Match already exists' };
         } else {
           const data = {
             leagueId: response.data.competition.id,
+            matchId: element.id,
             round: element.matchday,
             homeTeamId: element.homeTeam.id,
             homeTeamScore: element.score.fullTime.homeTeam,
@@ -47,12 +48,12 @@ export class RoundsService {
             status: element.status,
           };
           this.roundRepository.save(data);
-          return { message: 'Data of the rounds inserted in the tables' };
         }
       });
     } catch (error) {
       console.log(error);
     }
+    return { message: 'Data of the rounds inserted in the tables' };
   }
 
   findAll() {
@@ -85,14 +86,15 @@ export class RoundsService {
       );
       response.data.matches.forEach(async (element) => {
         const dataDB = await this.roundRepository.findOne({
-          where: { round: element.matchday },
+          where: { matchId: element.id },
         });
 
         if (!dataDB) {
-          return { message: 'Round not found' };
+          return { message: 'Match not found' };
         } else {
           const data = {
             leagueId: response.data.competition.id,
+            matchId: element.id,
             round: element.matchday,
             homeTeamId: element.homeTeam.id,
             homeTeamScore: element.score.fullTime.homeTeam,
@@ -102,14 +104,13 @@ export class RoundsService {
             status: element.status,
           };
 
-          // const responseDB = await this.roundRepository.save({
-          //   ...data,
-          //   ...updateRoundDto,
-          // });
-          console.log(data);
-          return { message: 'Rounds updated' };
+          const responseDB = await this.roundRepository.save({
+            ...dataDB,
+            ...data,
+          });
         }
       });
+      return { message: 'Rounds updated' };
     } catch (error) {
       console.log(error);
     }

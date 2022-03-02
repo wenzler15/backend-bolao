@@ -2,6 +2,7 @@
 export interface Round {
   id?: number;
   leagueId?: number;
+  matchId?: number;
   round?: number;
   homeTeamId?: string;
   homeTeamScore?: number;
