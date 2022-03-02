@@ -3,9 +3,9 @@ export interface Round {
   id?: number;
   leagueId?: number;
   round?: number;
-  homeTeamName?: string;
+  homeTeamId?: string;
   homeTeamScore?: number;
-  awayTeamName?: string;
+  awayTeamId?: string;
   awayTeamScore?: number;
   dateRound?: Date;
   status?: string;

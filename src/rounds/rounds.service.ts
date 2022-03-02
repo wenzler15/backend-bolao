@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RoundEntity } from './models/round.entity';
 import { Round } from './models/round.interface';
+const axios = require('axios');
 @Injectable()
 export class RoundsService {
   constructor(
@@ -11,7 +13,39 @@ export class RoundsService {
   ) {}
 
   async create(round: Round) {
-    return this.roundRepository.save(round);
+    const token = process.env.TOKEN_API;
+
+    //Id referente ao Brasileirão
+    const leagueId = 2013;
+
+    try {
+      const response = await axios.get(
+        `https://api.football-data.org/v2/competitions/${leagueId}/matches`,
+        {
+          headers: {
+            'X-Auth-Token': token,
+          },
+        },
+      );
+      response.data.matches.forEach((element) => {
+        const data = {
+          leagueId: response.data.competition.id,
+          round: element.matchday,
+          homeTeamId: element.homeTeam.id,
+          homeTeamScore: element.score.fullTime.homeTeam,
+          awayTeamId: element.awayTeam.id,
+          awayTeamScore: element.score.fullTime.awayTeam,
+          dateRound: element.utcDate,
+          status: element.status,
+        };
+
+        this.roundRepository.save(data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    return { message: 'Rounds table updated!' };
   }
 
   findAll() {

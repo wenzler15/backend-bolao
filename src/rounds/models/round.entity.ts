@@ -13,15 +13,15 @@ export class RoundEntity {
   round: number;
 
   @Column({ default: '' })
-  homeTeamName: string;
+  homeTeamId: string;
 
-  @Column({ type: 'integer', default: 0 })
+  @Column({ type: 'integer', default: 0, nullable: true })
   homeTeamScore: number;
 
   @Column({ default: '' })
-  awayTeamName: string;
+  awayTeamId: string;
 
-  @Column({ type: 'integer', default: 0 })
+  @Column({ type: 'integer', default: 0, nullable: true })
   awayTeamScore: number;
 
   @Column({ type: 'timestamp' })
