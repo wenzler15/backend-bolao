@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { MailService } from 'src/mail/mail.service';
 import { Repository } from 'typeorm';
 import { AuthEntity } from './models/auth.entity';
+import { ResetPasswordEntity } from './models/resetPassword.entity';
 import { UserEntity } from './models/user.entity';
 import { User } from './models/user.interface';
 const crypto = require("crypto");
@@ -129,6 +130,36 @@ export class UsersService {
     await this.mailService.sendForgotPassword(email, token);
 
     return  {message: "Token sent"}
+  }
+
+  async resetPassword(body: ResetPasswordEntity) {
+    const {email, token, password} = body;
+
+    if(!email || !token || !password) 
+      return {message: "Please send all params (email, token e password)"}
+
+    const user = await this.userRepository.findOne({where: {email}});
+
+    if(!user)
+      return {message: "User not found"}
+    
+    if(token !== user.passwordResetToken)
+      return {message: "Wrong token"}
+
+    const now = new Date();
+
+    if (now > user.passwordResetExpires)
+      return {message: "Expired token, create a new one"}
+
+    const newData = user;
+    newData.password = await bcrypt.hash(password, 10);
+
+    await this.userRepository.save({
+      ...user,
+      ...newData
+    });
+
+    return {message: "Password updated!"}
   }
 
   generateToken(params = {}) {

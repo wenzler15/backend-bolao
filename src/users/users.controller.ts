@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { subscriptionLogsToBeFn } from 'rxjs/internal/testing/TestScheduler';
 import { AuthEntity } from './models/auth.entity';
+import { ResetPasswordEntity } from './models/resetPassword.entity';
 import { User } from './models/user.interface';
 import { UsersService } from './users.service';
 const bcrypt = require("bcryptjs");
@@ -18,18 +19,27 @@ export class UserAuth {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  async auth(@Body() body: AuthEntity) {
+  auth(@Body() body: AuthEntity) {
     return this.usersService.auth(body);
   }
 }
-
 @Controller('forgot_password')
 export class UserForgotPassword {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  async forgotPassword(@Body() email: any) {
+  forgotPassword(@Body() email: any) {
     return this.usersService.forgotPassword(email.email);
+  }
+}
+
+@Controller('reset_password')
+export class UserResetPassword {
+  constructor(private readonly usersService: UsersService) {}
+
+  @Post()
+  resetPassword(@Body() body: ResetPasswordEntity) {
+    return this.usersService.resetPassword(body);
   }
 }
 
