@@ -15,13 +15,16 @@ export class UserEntity {
     password: string;
 
     @Column({ default: ''})
-    favoriteTeam: string;
+    favoriteTeam: number;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
     createdAt: Date;
 
     @Column({ default: ''})
     passwordResetToken: string;
+
+    @Column({default: '', nullable: true})
+    facebookToken: string;
 
     @Column({ type: 'timestamp', nullable: true})
     passwordResetExpires: Date;

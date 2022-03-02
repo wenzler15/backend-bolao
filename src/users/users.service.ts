@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable prettier/prettier */
+import { SendGridService } from '@anchan828/nest-sendgrid';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MailService } from 'src/mail/mail.service';
 import { Repository } from 'typeorm';
 import { AuthEntity } from './models/auth.entity';
+import { ResetPasswordEntity } from './models/resetPassword.entity';
 import { UserEntity } from './models/user.entity';
 import { User } from './models/user.interface';
 const crypto = require("crypto");
@@ -16,7 +17,7 @@ export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    private readonly mailService: MailService) {}
+    private readonly sendGird: SendGridService) {}
 
   async create(user: User) {
     const email = user.email;
@@ -128,11 +129,47 @@ export class UsersService {
       ...newInfos
     });
 
-    await this.mailService.sendForgotPassword(email, token);
+    await this.sendGird.send({
+      to: email,
+      from: process.env.SEND_GRID_FROM,
+      subject: "Esqueci minha senha",
+      text: "Parece que você esqueceu sua senha",
+      html: `<p>Esqueceu sua senha? Não tem problema, use esse token para redefinir sua senha: ${token} <p>`
+    });
 
     return  {message: "Token sent"}
   }
 
+  async resetPassword(body: ResetPasswordEntity) {
+    const {email, token, password} = body;
+
+    if(!email || !token || !password) 
+      return {message: "Please send all params (email, token e password)"}
+
+    const user = await this.userRepository.findOne({where: {email}});
+
+    if(!user)
+      return {message: "User not found"}
+    
+    if(token !== user.passwordResetToken)
+      return {message: "Wrong token"}
+
+    const now = new Date();
+
+    if (now > user.passwordResetExpires)
+      return {message: "Expired token, create a new one"}
+
+    const newData = user;
+    newData.password = await bcrypt.hash(password, 10);
+
+    await this.userRepository.save({
+      ...user,
+      ...newData
+    });
+
+    return {message: "Password updated!"}
+  }
+  
   generateToken(params = {}) {
     return jwt.sign(params, "7ccd7835da99ef1dbbce76128d3ae0e7", {
       expiresIn: 86400
