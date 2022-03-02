@@ -34,9 +34,9 @@ export class RoundsController {
     return this.roundsService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: any) {
-    return this.roundsService.update(id, updateUserDto);
+  @Patch()
+  update(@Body() updateRoundDto: Round) {
+    return this.roundsService.update(updateRoundDto);
   }
 
   @Delete(':id')

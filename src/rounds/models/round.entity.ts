@@ -24,7 +24,7 @@ export class RoundEntity {
   @Column({ type: 'integer', default: 0, nullable: true })
   awayTeamScore: number;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'timestamp', nullable: true })
   dateRound: Date;
 
   @Column({ default: '' })

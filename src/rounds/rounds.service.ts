@@ -27,49 +27,92 @@ export class RoundsService {
           },
         },
       );
-      response.data.matches.forEach((element) => {
-        const data = {
-          leagueId: response.data.competition.id,
-          round: element.matchday,
-          homeTeamId: element.homeTeam.id,
-          homeTeamScore: element.score.fullTime.homeTeam,
-          awayTeamId: element.awayTeam.id,
-          awayTeamScore: element.score.fullTime.awayTeam,
-          dateRound: element.utcDate,
-          status: element.status,
-        };
 
-        this.roundRepository.save(data);
+      response.data.matches.forEach(async (element) => {
+        const roundExists = await this.roundRepository.findOne({
+          where: { round: element.matchday },
+        });
+
+        if (roundExists) {
+          return { message: 'Round already exists' };
+        } else {
+          const data = {
+            leagueId: response.data.competition.id,
+            round: element.matchday,
+            homeTeamId: element.homeTeam.id,
+            homeTeamScore: element.score.fullTime.homeTeam,
+            awayTeamId: element.awayTeam.id,
+            awayTeamScore: element.score.fullTime.awayTeam,
+            dateRound: element.utcDate,
+            status: element.status,
+          };
+          this.roundRepository.save(data);
+          return { message: 'Data of the rounds inserted in the tables' };
+        }
       });
     } catch (error) {
       console.log(error);
     }
-
-    return { message: 'Rounds table updated!' };
   }
 
   findAll() {
-    return this.roundRepository.find();
+    return this.roundRepository.find({
+      order: {
+        round: 'ASC',
+        dateRound: 'ASC',
+      },
+    });
   }
 
   findOne(id: string) {
     return this.roundRepository.findByIds([id]);
   }
 
-  update(id: string, updateRoundDto: string) {
-    // return this.roundModel
-    //   .findByIdAndUpdate(
-    //     {
-    //       _id: id,
-    //     },
-    //     {
-    //       $set: updateRoundDto,
-    //     },
-    //     {
-    //       new: true,
-    //     },
-    //   )
-    //   .exec();
+  async update(updateRoundDto: Round) {
+    const token = process.env.TOKEN_API;
+
+    //Id referente ao Brasileirão
+    const leagueId = 2013;
+
+    try {
+      const response = await axios.get(
+        `https://api.football-data.org/v2/competitions/${leagueId}/matches`,
+        {
+          headers: {
+            'X-Auth-Token': token,
+          },
+        },
+      );
+      response.data.matches.forEach(async (element) => {
+        const dataDB = await this.roundRepository.findOne({
+          where: { round: element.matchday },
+        });
+
+        if (!dataDB) {
+          return { message: 'Round not found' };
+        } else {
+          const data = {
+            leagueId: response.data.competition.id,
+            round: element.matchday,
+            homeTeamId: element.homeTeam.id,
+            homeTeamScore: element.score.fullTime.homeTeam,
+            awayTeamId: element.awayTeam.id,
+            awayTeamScore: element.score.fullTime.awayTeam,
+            dateRound: element.utcDate,
+            status: element.status,
+          };
+
+          // const responseDB = await this.roundRepository.save({
+          //   ...data,
+          //   ...updateRoundDto,
+          // });
+          console.log(data);
+          return { message: 'Rounds updated' };
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   remove(id: string) {
