@@ -5,6 +5,8 @@ import { UsersModule } from './users/users.module';
 import { SendGridModule } from '@anchan828/nest-sendgrid';
 import { RoundsModule } from './rounds/rounds.module';
 import { TeamsModule } from './teams/teams.module';
+import { BetsOneLeftModule } from './betsOneLeft/betsOneLeft.module';
+import { BetsRoundsModule } from './betsRounds/betsRounds.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { TeamsModule } from './teams/teams.module';
     }),
     RoundsModule,
     TeamsModule,
+    BetsOneLeftModule,
+    BetsRoundsModule,
   ],
   controllers: [],
   providers: [],

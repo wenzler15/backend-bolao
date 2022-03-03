@@ -1,37 +1,34 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('round')
-export class RoundEntity {
+@Entity('betOneLeft')
+export class BetOneLeftEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'integer', default: 0 })
-  leagueId: number;
+  userId: number;
 
-  @Column({ type: 'integer', default: 0 })
-  matchId: number;
+  @Column({ type: 'integer', default: 3 })
+  life: number;
 
   @Column({ type: 'integer', default: 0 })
   round: number;
 
   @Column({ type: 'integer', default: 0 })
-  homeTeamId: number;
+  matchId: number;
 
-  @Column({ type: 'integer', default: 0, nullable: true })
+  @Column({ type: 'integer', default: 0 })
   homeTeamScore: number;
 
   @Column({ type: 'integer', default: 0 })
-  awayTeamId: number;
-
-  @Column({ type: 'integer', default: 0, nullable: true })
   awayTeamScore: number;
 
-  @Column({ type: 'timestamp', nullable: true })
-  dateRound: Date;
-
   @Column({ default: '' })
-  status: string;
+  winnerTeam: string;
+
+  @Column({ default: false })
+  status: boolean;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

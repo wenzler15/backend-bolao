@@ -14,7 +14,7 @@ export class UserEntity {
     @Column({ default: ''})
     password: string;
 
-    @Column({ default: ''})
+    @Column({ type: 'integer', default: 0 })
     favoriteTeam: number;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})

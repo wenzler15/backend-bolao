@@ -1,0 +1,46 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-var-requires */
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { BetOneLeft } from './models/betOneLeft.interface';
+import { BetsOneLeftService } from './betsOneLeft.service';
+
+@Controller('betsOneLeft')
+export class BetsOneLeftController {
+  constructor(private readonly betsOneLeftService: BetsOneLeftService) {}
+
+  @Post()
+  async create(@Body() post: BetOneLeft) {
+
+    const response = await this.betsOneLeftService.create(post);
+
+    return response;
+  }
+
+  @Get()
+  findAll() {
+    return this.betsOneLeftService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.betsOneLeftService.findOne(id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateBetLeftOneDto: BetOneLeft) {
+    return this.betsOneLeftService.update(id, updateBetLeftOneDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.betsOneLeftService.remove(id);
+  }
+}
