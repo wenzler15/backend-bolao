@@ -19,7 +19,7 @@ export class BetsRoundsService {
   }
 
   async adminAprove(body: AdminAproveEntity) {
-    const {id, status} = body;
+    const {id} = body;
     const bet = await this.betRoundRepository.findOne({where: {id}});
 
     await this.betRoundRepository.save({

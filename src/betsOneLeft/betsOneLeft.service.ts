@@ -25,7 +25,7 @@ export class BetsOneLeftService {
   }
 
   async adminAprove(body: AdminAproveEntity) {
-    const {id, status} = body;
+    const {id} = body;
     const bet = await this.betOneLeftRepository.findOne({where: {id}});
 
     await this.betOneLeftRepository.save({
