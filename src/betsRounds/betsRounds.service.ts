@@ -2,6 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { AdminAproveEntity } from './models/adminAprove.entity';
 import { BetRoundEntity } from './models/betRounds.entity';
 import { BetRound } from './models/betRounds.interface';
 @Injectable()
@@ -12,15 +13,21 @@ export class BetsRoundsService {
   ) {}
 
   async create(betRound: BetRound) {
-    // const round = betOneLeft.round;
-
-    // const betLeftOneExists = await this.betOneLeftRepository.findOne({ where: { round } });
-
-    // if (betLeftOneExists) return { message: 'Bet left one already exists' };
-
     const response = await this.betRoundRepository.save(betRound);
 
     return { message: 'Bet round created', betRound: response };
+  }
+
+  async adminAprove(body: AdminAproveEntity) {
+    const {id, status} = body;
+    const bet = await this.betRoundRepository.findOne({where: {id}});
+
+    await this.betRoundRepository.save({
+      ...bet,
+      ...body,
+    });
+
+    return {message: "Bet updated!"}
   }
 
   findAll() {

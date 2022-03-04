@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BetOneLeftEntity } from './models/betOnelLeft.entity';
 import { BetOneLeft } from './models/betOneLeft.interface';
+import { AdminAproveEntity } from './models/adminAprove.entity';
 @Injectable()
 export class BetsOneLeftService {
   constructor(
@@ -22,6 +23,19 @@ export class BetsOneLeftService {
 
     return { message: 'Bet left one created', betLeftOne: response };
   }
+
+  async adminAprove(body: AdminAproveEntity) {
+    const {id, status} = body;
+    const bet = await this.betOneLeftRepository.findOne({where: {id}});
+
+    await this.betOneLeftRepository.save({
+      ...bet,
+      ...body,
+    });
+
+    return {message: "Bet updated!"}
+  }
+
 
   findAll() {
     return this.betOneLeftRepository.find();

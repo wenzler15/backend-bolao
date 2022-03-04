@@ -11,6 +11,17 @@ import {
 } from '@nestjs/common';
 import { BetOneLeft } from './models/betOneLeft.interface';
 import { BetsOneLeftService } from './betsOneLeft.service';
+import { AdminAproveEntity } from './models/adminAprove.entity';
+
+@Controller('betsOneLeft/admin')
+export class BetsRoundsAdminController {
+  constructor(private readonly betsOneLeftService: BetsOneLeftService) {}
+
+  @Post()
+  create(@Body() post: AdminAproveEntity) {
+    return this.betsOneLeftService.adminAprove(post);
+  }
+}
 
 @Controller('betsOneLeft')
 export class BetsOneLeftController {
