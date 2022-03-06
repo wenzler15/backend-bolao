@@ -19,6 +19,13 @@ export class BetsRoundsService {
   ) {}
 
   async create(betRound: BetRound) {
+    const {userId, matchId} = betRound;
+
+    const betExits = await this.betRoundRepository.findOne({userId, matchId});
+
+    if(betExits)
+      return {message: "User had already betted in this match!"}
+
     const response = await this.betRoundRepository.save(betRound);
 
     return { message: 'Bet round created', betRound: response };
@@ -50,17 +57,17 @@ export class BetsRoundsService {
 
     if(bet.awayTeamScore === round.awayTeamScore && bet.homeTeamScore === round.homeTeamScore && winner != 0) {
       points += 100;
-    } else if(parseInt(bet.winnerTeam) === 0 && winner === 0) {
+    } else if(bet.winnerTeam === 0 && winner === 0) {
       points += 60;
-    } else if(parseInt(bet.winnerTeam) == winner) {
+    } else if(bet.winnerTeam == winner) {
       points += 80;
     }
     
-    if (parseInt(bet.winnerTeam) === user.favoriteTeam || parseInt(bet.winnerTeam) === 0 && round.awayTeamId === user.favoriteTeam || round.homeTeamId === user.favoriteTeam) {
+    if (bet.winnerTeam === user.favoriteTeam || bet.winnerTeam === 0 && round.awayTeamId === user.favoriteTeam || round.homeTeamId === user.favoriteTeam) {
       points *= 2;
     }
 
-    updateUser.points = points;
+     updateUser.points = points;
 
     await this.userRepository.save({
       ...user,

@@ -3,9 +3,7 @@ export interface BetOneLeft {
   id?: number;
   userId?: number;
   life?: number;
-  round?: number;
-  homeTeamScore?: number;
-  awayTeamScore?: number;
-  winnerTeam?: string;
+  matchId?: number;
+  winnerTeam?: number;
   status?: boolean;
 }

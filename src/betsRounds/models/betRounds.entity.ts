@@ -21,8 +21,8 @@ export class BetRoundEntity {
   @Column({ type: 'integer', default: 0 })
   awayTeamScore: number;
 
-  @Column({ default: '' })
-  winnerTeam: string;
+  @Column({ type: 'integer', default: 0 })
+  winnerTeam: number;
 
   @Column({ default: false })
   status: boolean;
