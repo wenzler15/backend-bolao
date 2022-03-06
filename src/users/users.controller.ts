@@ -36,6 +36,16 @@ export class UserForgotPassword {
   }
 }
 
+@Controller('ranking')
+export class RankingController {
+  constructor(private readonly usersService: UsersService) {}
+
+  @Get()
+  raking() {
+    return this.usersService.getRanking();
+  }
+} 
+
 @Controller('reset_password')
 export class UserResetPassword {
   constructor(private readonly usersService: UsersService) {}

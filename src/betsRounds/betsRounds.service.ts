@@ -48,7 +48,7 @@ export class BetsRoundsService {
       winner = 0;
     }
 
-    if(bet.awayTeamScore === round.awayTeamScore && bet.homeTeamScore === round.homeTeamScore) {
+    if(bet.awayTeamScore === round.awayTeamScore && bet.homeTeamScore === round.homeTeamScore && winner != 0) {
       points += 100;
     } else if(parseInt(bet.winnerTeam) === 0 && winner === 0) {
       points += 60;

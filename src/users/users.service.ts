@@ -140,6 +140,23 @@ export class UsersService {
     return  {message: "Token sent"}
   }
 
+  async getRanking() {
+    const response = await this.userRepository.find({
+      select: ["name", "favoriteTeam", "points"],
+      order: {
+        points: "DESC"
+      }
+    });
+
+    response.forEach((item) => {
+      item.password = undefined;
+      item.passwordResetExpires = undefined;
+      item.passwordResetToken = undefined;
+    })
+
+    return response;
+  }
+
   async resetPassword(body: ResetPasswordEntity) {
     const {email, token, password} = body;
 
