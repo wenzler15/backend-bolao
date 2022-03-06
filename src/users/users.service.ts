@@ -77,11 +77,11 @@ export class UsersService {
   response.passwordResetExpires = undefined;
   response.passwordResetToken = undefined;
 
-  return {message: "User updated", user: response};
+  return {message: "User updated", user: response}
   }
 
   remove(id: string) {
-    return {message: "User deleted" ,data: this.userRepository.delete(id)}
+    return {message: "User deleted" , data: this.userRepository.delete(id)}
   }
 
   async auth(body: AuthEntity) {

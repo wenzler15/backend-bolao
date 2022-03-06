@@ -5,6 +5,7 @@ export interface User {
     name?: string;
     favoriteTeam?: number;
     password?: string;
+    points?: number;
     createdAt?: Date;
     facebookToken?: string;
     passwordResetToken?: string;

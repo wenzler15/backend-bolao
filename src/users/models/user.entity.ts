@@ -17,6 +17,9 @@ export class UserEntity {
     @Column({ type: 'integer', default: 0 })
     favoriteTeam: number;
 
+    @Column({ type: 'integer', default: 0 })
+    points: number;
+
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
     createdAt: Date;
 
