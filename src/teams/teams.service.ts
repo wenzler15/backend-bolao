@@ -12,11 +12,10 @@ export class TeamsService {
     private readonly teamRepository: Repository<TeamEntity>,
   ) {}
 
-  async create(team: Team) {
+  async create(league: number, team: Team) {
     const token = process.env.TOKEN_API;
 
-    //Id referente ao Brasileirão
-    const leagueId = 2013;
+    const leagueId = league;
 
     try {
       const response = await axios.get(

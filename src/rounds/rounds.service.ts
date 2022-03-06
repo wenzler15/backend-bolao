@@ -12,11 +12,10 @@ export class RoundsService {
     private readonly roundRepository: Repository<RoundEntity>,
   ) {}
 
-  async create(round: Round) {
+  async create(league: number, round: Round) {
     const token = process.env.TOKEN_API;
 
-    //Id referente ao Brasileirão
-    const leagueId = 2013;
+    const leagueId = league;
 
     try {
       const response = await axios.get(

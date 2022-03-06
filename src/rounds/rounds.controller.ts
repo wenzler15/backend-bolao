@@ -16,10 +16,10 @@ import { RoundsService } from './rounds.service';
 export class RoundsController {
   constructor(private readonly roundsService: RoundsService) {}
 
-  @Post()
-  async create(@Body() post: Round) {
+  @Post(':league')
+  async create(@Param('league') league: number, @Body() post: Round) {
 
-    const response = await this.roundsService.create(post);
+    const response = await this.roundsService.create(league, post);
 
     return response;
   }
@@ -35,7 +35,7 @@ export class RoundsController {
   }
 
   @Patch()
-  update(@Body() updateRoundDto: Round) {
+  update(@Param('league') leagueId: number, @Body() updateRoundDto: Round) {
     return this.roundsService.update(updateRoundDto);
   }
 
