@@ -15,16 +15,15 @@ export class BetsRoundsService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(RoundEntity)
-    private readonly roundRepository: Repository<RoundEntity>
+    private readonly roundRepository: Repository<RoundEntity>,
   ) {}
 
   async create(betRound: BetRound) {
-    const {userId, matchId} = betRound;
+    const { userId, matchId } = betRound;
 
-    const betExits = await this.betRoundRepository.findOne({userId, matchId});
+    const betExits = await this.betRoundRepository.findOne({ userId, matchId });
 
-    if(betExits)
-      return {message: "User had already betted in this match!"}
+    if (betExits) return { message: 'User had already betted in this match!' };
 
     const response = await this.betRoundRepository.save(betRound);
 
@@ -32,22 +31,21 @@ export class BetsRoundsService {
   }
 
   async adminAprove(body: AdminAproveEntity) {
-    const {id} = body;
+    const { id } = body;
     let winner = 0;
 
-    const bet = await this.betRoundRepository.findOne({where: {id}});
-    
-    if(bet.status) 
-      return {message: "This bet has already been updated!"}
+    const bet = await this.betRoundRepository.findOne({ where: { id } });
+
+    if (bet.status) return { message: 'This bet has already been updated!' };
 
     const user = await this.userRepository.findOne({ id: bet.userId });
 
-    const round = await this.roundRepository.findOne({ matchId: bet.matchId })    
+    const round = await this.roundRepository.findOne({ matchId: bet.matchId });
 
     let updateUser = user;
     let points = user.points;
 
-    if(round.awayTeamScore > round.homeTeamScore) {
+    if (round.awayTeamScore > round.homeTeamScore) {
       winner = round.awayTeamId;
     } else if (round.homeTeamScore > round.awayTeamScore) {
       winner = round.homeTeamId;
@@ -55,23 +53,31 @@ export class BetsRoundsService {
       winner = 0;
     }
 
-    if(bet.awayTeamScore === round.awayTeamScore && bet.homeTeamScore === round.homeTeamScore && winner != 0) {
+    if (
+      bet.awayTeamScore === round.awayTeamScore &&
+      bet.homeTeamScore === round.homeTeamScore &&
+      winner != 0
+    ) {
       points += 100;
-    } else if(bet.winnerTeam === 0 && winner === 0) {
+    } else if (bet.winnerTeam === 0 && winner === 0) {
       points += 60;
-    } else if(bet.winnerTeam == winner) {
+    } else if (bet.winnerTeam == winner) {
       points += 80;
     }
-    
-    if (bet.winnerTeam === user.favoriteTeam || bet.winnerTeam === 0 && round.awayTeamId === user.favoriteTeam || round.homeTeamId === user.favoriteTeam) {
+
+    if (
+      bet.winnerTeam === user.favoriteTeam ||
+      (bet.winnerTeam === 0 && round.awayTeamId === user.favoriteTeam) ||
+      round.homeTeamId === user.favoriteTeam
+    ) {
       points *= 2;
     }
 
-     updateUser.points = points;
+    updateUser.points = points;
 
     await this.userRepository.save({
       ...user,
-      ...updateUser
+      ...updateUser,
     });
 
     await this.betRoundRepository.save({
@@ -79,7 +85,7 @@ export class BetsRoundsService {
       ...body,
     });
 
-    return {message: "Bet updated!"}
+    return { message: 'Bet updated!' };
   }
 
   findAll() {
@@ -105,5 +111,16 @@ export class BetsRoundsService {
 
   remove(id: string) {
     return this.betRoundRepository.delete(id);
+  }
+
+  async getWinningBet(id: string) {
+    const response = await this.betRoundRepository.find({
+      where: { userId: id, status: true },
+      order: {
+        createdAt: 'ASC',
+      },
+    });
+
+    return response;
   }
 }
