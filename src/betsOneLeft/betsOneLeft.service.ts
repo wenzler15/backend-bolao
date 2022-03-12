@@ -6,6 +6,7 @@ import { BetOneLeftEntity } from './models/betOnelLeft.entity';
 import { BetOneLeft } from './models/betOneLeft.interface';
 import { AdminAproveEntity } from './models/adminAprove.entity';
 import { RoundEntity } from 'src/rounds/models/round.entity';
+const moment = require('moment');
 @Injectable()
 export class BetsOneLeftService {
   constructor(
@@ -36,9 +37,15 @@ export class BetsOneLeftService {
 
     if (betLeftOneExists) return { message: 'Bet left one already exists!' };
 
-    const response = await this.betOneLeftRepository.save(betOneLeft);
+    const round = await this.roundsRepository.findOne({ matchId: matchId });
 
-    return { message: 'Bet left one created', betLeftOne: response };
+    if (moment().utc() > round.dateRoundLocked) {
+      return { message: 'Bet round locked' };
+    } else {
+      const response = await this.betOneLeftRepository.save(betOneLeft);
+
+      return { message: 'Bet left one created', betLeftOne: response };
+    }
   }
 
   async adminAprove(body: AdminAproveEntity) {

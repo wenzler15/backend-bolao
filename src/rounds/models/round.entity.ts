@@ -30,6 +30,9 @@ export class RoundEntity {
   @Column({ type: 'timestamp', nullable: true })
   dateRound: Date;
 
+  @Column({ type: 'timestamp', nullable: true })
+  dateRoundLocked: Date;
+
   @Column({ default: '' })
   status: string;
 

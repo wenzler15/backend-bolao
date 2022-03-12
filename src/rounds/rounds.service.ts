@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { RoundEntity } from './models/round.entity';
 import { Round } from './models/round.interface';
 const axios = require('axios');
+const moment = require('moment');
 @Injectable()
 export class RoundsService {
   constructor(
@@ -43,9 +44,13 @@ export class RoundsService {
             homeTeamScore: element.score.fullTime.homeTeam,
             awayTeamId: element.awayTeam.id,
             awayTeamScore: element.score.fullTime.awayTeam,
-            dateRound: element.utcDate,
+            dateRound: moment.utc(element.utcDate),
+            dateRoundLocked: moment
+              .parseZone(element.utcDate)
+              .subtract(15, 'minutes'),
             status: element.status,
           };
+
           this.roundRepository.save(data);
         }
       });
@@ -99,7 +104,10 @@ export class RoundsService {
             homeTeamScore: element.score.fullTime.homeTeam,
             awayTeamId: element.awayTeam.id,
             awayTeamScore: element.score.fullTime.awayTeam,
-            dateRound: element.utcDate,
+            dateRound: moment.utc(element.utcDate),
+            dateRoundLocked: moment
+              .parseZone(element.utcDate)
+              .subtract(15, 'minutes'),
             status: element.status,
           };
 

@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { AdminAproveEntity } from './models/adminAprove.entity';
 import { BetRoundEntity } from './models/betRounds.entity';
 import { BetRound } from './models/betRounds.interface';
+const moment = require('moment');
 @Injectable()
 export class BetsRoundsService {
   constructor(
@@ -25,9 +26,15 @@ export class BetsRoundsService {
 
     if (betExits) return { message: 'User had already betted in this match!' };
 
-    const response = await this.betRoundRepository.save(betRound);
+    const round = await this.roundRepository.findOne({ matchId: matchId });
 
-    return { message: 'Bet round created', betRound: response };
+    if (moment().utc() > round.dateRoundLocked) {
+      return { message: 'Bet round locked' };
+    } else {
+      const response = await this.betRoundRepository.save(betRound);
+
+      return { message: 'Bet round created', betRound: response };
+    }
   }
 
   async adminAprove(body: AdminAproveEntity) {
