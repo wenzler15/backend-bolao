@@ -11,7 +11,7 @@ import { User } from './models/user.interface';
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const axios = require('axios')
 @Injectable()
 export class UsersService {
   constructor(
@@ -20,7 +20,7 @@ export class UsersService {
     private readonly sendGird: SendGridService) {}
 
   async create(user: User) {
-    const email = user.email;
+    const {email, name, lastName} = user;
 
     const userExists = await this.userRepository.findOne({ where: {email}}); 
 
@@ -28,7 +28,7 @@ export class UsersService {
       return {message: "User already exists"}
 
     const response = await this.userRepository.save(user);
-    
+
     response.password = undefined;
     response.passwordResetExpires = undefined;
     response.passwordResetToken = undefined;
@@ -138,6 +138,22 @@ export class UsersService {
     });
 
     return  {message: "Token sent"}
+  }
+
+  async loginSocial(body: any) {
+    const email = body.email;
+    const user = await this.userRepository.findOne({ where: {email}});
+    if(body.facebook_token) {
+      if(body.facebook_token === user.facebookToken) {
+        return {message: "Correct token!"}
+      }
+      return {message: "Incorrect token!"}
+    } else {
+      if(body.google_token === user.googleToken) {
+        return {message: "Correct token!"}
+      }
+      return {message: "Incorrect token!"}
+    } 
   }
 
   async getRanking() {

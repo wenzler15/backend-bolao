@@ -12,10 +12,31 @@ export class UserEntity {
     name: string;
 
     @Column({ default: ''})
+    lastName: string;
+
+    @Column({ default: ''})
     password: string;
 
     @Column({ type: 'integer', default: 0 })
     favoriteTeam: number;
+
+    @Column({ type: 'integer', default: 0 })
+    codeArea: number;
+
+    @Column({ type: 'integer', default: 0 })
+    phone: number;
+
+    @Column({ default: 0 })
+    zipCode: string;
+
+    @Column({ default: 0 })
+    streetName: string;
+
+    @Column({ type: 'integer', default: 0 })
+    houseNumber: number;
+
+    @Column({ type: 'integer', default: 0 })
+    cpf: number;
 
     @Column({ type: 'integer', default: 0 })
     points: number;
@@ -29,6 +50,11 @@ export class UserEntity {
     @Column({default: '', nullable: true})
     facebookToken: string;
 
+    @Column({default: '', nullable: true})
+    googleToken: string;
+
     @Column({ type: 'timestamp', nullable: true})
     passwordResetExpires: Date;
 }
+
+

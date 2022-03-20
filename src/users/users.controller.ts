@@ -9,7 +9,6 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { subscriptionLogsToBeFn } from 'rxjs/internal/testing/TestScheduler';
 import { AuthEntity } from './models/auth.entity';
 import { ResetPasswordEntity } from './models/resetPassword.entity';
 import { User } from './models/user.interface';
@@ -23,6 +22,16 @@ export class UserAuth {
   @Post()
   auth(@Body() body: AuthEntity) {
     return this.usersService.auth(body);
+  }
+}
+
+@Controller('social_login')
+export class SocialLogin {
+  constructor(private readonly usersService: UsersService) {}
+  
+  @Post()
+  loginSocial(@Body() body: any) {
+    return this.usersService.loginSocial(body);
   }
 }
 
