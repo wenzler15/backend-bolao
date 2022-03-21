@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PaymentEntity } from 'src/payment/models/payment.entity';
 import { RoundEntity } from 'src/rounds/models/round.entity';
 import { UserEntity } from 'src/users/models/user.entity';
 import { Repository } from 'typeorm';
@@ -17,23 +18,50 @@ export class BetsRoundsService {
     private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(RoundEntity)
     private readonly roundRepository: Repository<RoundEntity>,
+    @InjectRepository(PaymentEntity)
+    private readonly paymentRepository: Repository<PaymentEntity>,
   ) {}
 
   async create(betRound: BetRound) {
     const { userId, matchId } = betRound;
 
-    const betExits = await this.betRoundRepository.findOne({ userId, matchId });
+    const rounds = await this.roundRepository.find({ matchId });
 
-    if (betExits) return { message: 'User had already betted in this match!' };
+    const payment = await this.paymentRepository.find({
+      where: {
+        leagueId: rounds[0].leagueId,
+        userId,
+      },
+    });
 
-    const round = await this.roundRepository.findOne({ matchId: matchId });
+    const firstBet = await this.betRoundRepository.findOne({ userId });
 
-    if (moment().utc() > round.dateRoundLocked) {
-      return { message: 'Bet round locked' };
+    if (payment[0] || !firstBet) {
+      if (payment[0].status === 'aprovado' || !firstBet) {
+        const betExits = await this.betRoundRepository.findOne({
+          userId,
+          matchId,
+        });
+
+        if (betExits)
+          return { message: 'User had already betted in this match!' };
+
+        const round = await this.roundRepository.findOne({ matchId: matchId });
+
+        if (moment().utc() < round.dateRoundLocked) {
+          return { message: 'Bet round locked' };
+        } else {
+          const response = await this.betRoundRepository.save(betRound);
+
+          return { message: 'Bet round created', betRound: response };
+        }
+      } else if (payment[0].status === 'processando') {
+        return { message: 'Processing payment!' };
+      } else {
+        return { message: 'Paymente denied!' };
+      }
     } else {
-      const response = await this.betRoundRepository.save(betRound);
-
-      return { message: 'Bet round created', betRound: response };
+      return { message: 'Payment not found!' };
     }
   }
 

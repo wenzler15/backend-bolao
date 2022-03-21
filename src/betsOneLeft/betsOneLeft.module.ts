@@ -8,9 +8,10 @@ import {
 import { BetOneLeftEntity } from './models/betOnelLeft.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RoundEntity } from 'src/rounds/models/round.entity';
+import { PaymentEntity } from 'src/payment/models/payment.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([BetOneLeftEntity, RoundEntity])],
+  imports: [TypeOrmModule.forFeature([BetOneLeftEntity, RoundEntity, PaymentEntity])],
   controllers: [
     BetsOneLeftController,
     BetsRoundsAdminController,

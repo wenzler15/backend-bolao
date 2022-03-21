@@ -6,6 +6,7 @@ import { BetOneLeftEntity } from './models/betOnelLeft.entity';
 import { BetOneLeft } from './models/betOneLeft.interface';
 import { AdminAproveEntity } from './models/adminAprove.entity';
 import { RoundEntity } from 'src/rounds/models/round.entity';
+import { PaymentEntity } from 'src/payment/models/payment.entity';
 const moment = require('moment');
 @Injectable()
 export class BetsOneLeftService {
@@ -14,37 +15,66 @@ export class BetsOneLeftService {
     private readonly betOneLeftRepository: Repository<BetOneLeftEntity>,
     @InjectRepository(RoundEntity)
     private readonly roundsRepository: Repository<RoundEntity>,
+    @InjectRepository(PaymentEntity)
+    private readonly paymentRepository: Repository<PaymentEntity>,
   ) {}
 
   async create(betOneLeft: BetOneLeft) {
     const { userId, matchId } = betOneLeft;
 
-    const betLeftOneExists = await this.betOneLeftRepository.findOne({
-      userId,
-      matchId,
+    const rounds = await this.roundsRepository.find({ matchId });
+
+    const payment = await this.paymentRepository.find({
+      where: {
+        leagueId: rounds[0].leagueId,
+        userId,
+      },
     });
 
-    if (betLeftOneExists)
-      return { message: 'This user has already betted in this match!' };
+    if (payment[0]) {
+      if (payment[0].status === 'aprovado') {
+        const betLeftOneExists = await this.betOneLeftRepository.findOne({
+          userId,
+          matchId,
+        });
 
-    const lastBet = await this.betOneLeftRepository.findOne({
-      where: { userId },
-      order: { createdAt: 'DESC' },
-    });
+        if (betLeftOneExists)
+          return { message: 'This user has already betted in this match!' };
 
-    if (lastBet && lastBet.life === 0)
-      return { message: "This user don't have more lifes!" };
+        const lastBet = await this.betOneLeftRepository.findOne({
+          where: { userId },
+          order: { createdAt: 'DESC' },
+        });
 
-    if (betLeftOneExists) return { message: 'Bet left one already exists!' };
+        
+        if (lastBet && lastBet.life === 0)
+        return { message: "This user don't have more lifes!" };
+        
+        const round = await this.roundsRepository.findOne({ matchId: matchId });
+        
+        if (moment().utc() < round.dateRoundLocked) {
+          return { message: 'Bet round locked' };
+        } else { 
+          
+          if (!lastBet && rounds[0].round >= 7) {
+            betOneLeft.life = 2;
+            const response = await this.betOneLeftRepository.save(betOneLeft);
+            
+            return { message: 'Bet left one created', betLeftOne: response };
+          } else {            
+            const response = await this.betOneLeftRepository.save(betOneLeft);
+            
+            return { message: 'Bet left one created', betLeftOne: response };
+          }
 
-    const round = await this.roundsRepository.findOne({ matchId: matchId });
-
-    if (moment().utc() > round.dateRoundLocked) {
-      return { message: 'Bet round locked' };
+        }
+      } else if (payment[0].status === 'processando') {
+        return { message: 'Processing payment!' };
+      } else {
+        return { message: 'Paymente denied!' };
+      }
     } else {
-      const response = await this.betOneLeftRepository.save(betOneLeft);
-
-      return { message: 'Bet left one created', betLeftOne: response };
+      return { message: 'Payment not found!' };
     }
   }
 
