@@ -3,6 +3,9 @@
 import { SendGridService } from '@anchan828/nest-sendgrid';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { BetOneLeftEntity } from 'src/betsOneLeft/models/betOnelLeft.entity';
+import { BetRoundEntity } from 'src/betsRounds/models/betRounds.entity';
+import { PaymentEntity } from 'src/payment/models/payment.entity';
 import { Repository } from 'typeorm';
 import { AuthEntity } from './models/auth.entity';
 import { ResetPasswordEntity } from './models/resetPassword.entity';
@@ -17,6 +20,8 @@ export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
+    @InjectRepository(PaymentEntity)
+    private readonly paymentRepository: Repository<PaymentEntity>,
     private readonly sendGird: SendGridService) {}
 
   async create(user: User) {
@@ -138,6 +143,25 @@ export class UsersService {
     });
 
     return  {message: "Token sent"}
+  }
+
+  async checkPayment(body: any) {
+    const {userId, leagueId} = body;
+    if(body.gameMode === 1) {
+      const status = await this.paymentRepository.findOne({ userId, leagueId });
+
+      if(!status) 
+        return {message: 'Payment not found!'}
+
+      return {message: status.status};
+    } else {
+      const status = await this.paymentRepository.findOne({ userId, leagueId, round: body.round });
+
+      if(!status) 
+        return {message: 'Payment not found!'}
+
+      return {message: status.status};
+    }
   }
 
   async loginSocial(body: any) {

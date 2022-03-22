@@ -25,6 +25,16 @@ export class UserAuth {
   }
 }
 
+@Controller('check_payment')
+export class CheckPayment {
+  constructor(private readonly usersService: UsersService) {}
+
+  @Post()
+  checkPayment(@Body() body: any) {
+    return this.usersService.checkPayment(body);
+  }
+}
+
 @Controller('social_login')
 export class SocialLogin {
   constructor(private readonly usersService: UsersService) {}
