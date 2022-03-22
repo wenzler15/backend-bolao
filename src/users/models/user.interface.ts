@@ -4,9 +4,9 @@ export interface User {
     email?: string;
     name?: string;
     lastName?: string;
-    codeArea?: number;
-    phone?: number;
-    cpf?: number;
+    codeArea?: string;
+    phone?: string;
+    cpf?: string;
     zipCode?: string;
     streetName?: string;
     houseNumber?: number;

@@ -21,10 +21,10 @@ export class UserEntity {
     favoriteTeam: number;
 
     @Column({ type: 'integer', default: 0 })
-    codeArea: number;
+    codeArea: string;
 
     @Column({ type: 'integer', default: 0 })
-    phone: number;
+    phone: string;
 
     @Column({ default: 0 })
     zipCode: string;
@@ -36,7 +36,7 @@ export class UserEntity {
     houseNumber: number;
 
     @Column({ type: 'integer', default: 0 })
-    cpf: number;
+    cpf: string;
 
     @Column({ type: 'integer', default: 0 })
     points: number;
