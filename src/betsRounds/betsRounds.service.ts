@@ -36,8 +36,8 @@ export class BetsRoundsService {
 
     const firstBet = await this.betRoundRepository.findOne({ userId });
 
-    if (payment[0] || !firstBet) {
-      if (payment[0] && payment[0].status === 'aprovado' && payment[0].gameMode === 1 || payment[0].gameMode === 3 || !firstBet) {
+    // if (payment[0] || !firstBet) {
+      // if (payment[0] && payment[0].status === 'aprovado' && payment[0].gameMode === 1 || payment[0].gameMode === 3 || !firstBet) {
         const betExits = await this.betRoundRepository.findOne({
           userId,
           matchId,
@@ -55,14 +55,14 @@ export class BetsRoundsService {
 
           return { message: 'Bet round created', betRound: response };
         }
-      } else if (payment[0].status === 'processando') {
-        return { message: 'Processing payment!' };
-      } else {
+      // } else if (payment[0].status === 'processando') {
+      //   return { message: 'Processing payment!' };
+      // } else {
         return { message: 'Paymente denied!' };
       }
-    } else {
-      return { message: 'Payment not found!' };
-    }
+    // } else {
+    //   return { message: 'Payment not found!' };
+    // }
   }
 
   async adminAprove(body: AdminAproveEntity) {

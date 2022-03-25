@@ -31,8 +31,8 @@ export class BetsOneLeftService {
       },
     });
 
-    if (payment[0]) {
-      if (payment[0].status === 'aprovado' && payment[0].gameMode === 2 || payment[0].gameMode === 3) {
+    // if (payment[0]) {
+      // if (payment[0].status === 'aprovado' && payment[0].gameMode === 2 || payment[0].gameMode === 3) {
         const betLeftOneExists = await this.betOneLeftRepository.findOne({
           userId,
           matchId,
@@ -67,14 +67,14 @@ export class BetsOneLeftService {
           }
 
         }
-      } else if (payment[0].status === 'processando') {
-        return { message: 'Processing payment!' };
-      } else {
-        return { message: 'Paymente denied!' };
-      }
-    } else {
-      return { message: 'Payment not found!' };
-    }
+      // } else if (payment[0].status === 'processando') {
+      //   return { message: 'Processing payment!' };
+      // } else {
+      //   return { message: 'Paymente denied!' };
+      // }
+    // } else {
+    //   return { message: 'Payment not found!' };
+    // }
   }
 
   async adminAprove(body: AdminAproveEntity) {
