@@ -1,0 +1,506 @@
+
+> bolaoapp@0.0.1 start
+> nest start
+
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +81ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[SendGridModule] [39m[32mSet API Key[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSendGridModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +107ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRoundsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTeamsModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBetsOneLeftModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBetsRoundsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLeaguesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mNewsModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUsersController {/users}:[39m[38;5;3m +6ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users, POST} route[39m[38;5;3m +3ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserAuth {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserForgotPassword {/forgot_password}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/forgot_password, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserResetPassword {/reset_password}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reset_password, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRankingController {/ranking}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/ranking, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mSocialLogin {/social_login}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/social_login, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRoundsController {/rounds}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:league, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mTeamsController {/teams}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:league, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsOneLeftController {/betsOneLeft}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsAdminController {/betsOneLeft/admin}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/admin, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mWinningBetController {/winningBetsOneLeft}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/winningBetsOneLeft/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsController {/betsRound}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsAdminController {/betsRound/admin}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/admin, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mWinningBetController {/winningBetsRound}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/winningBetsRound/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mLeaguesController {/leagues}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mNewsController {/news}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16021  - [39m03/21/2022, 4:17:35 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +5ms[39m
+
+> bolaoapp@0.0.1 start
+> nest start
+
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:12 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:12 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +82ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:12 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:12 AM [32m    LOG[39m [38;5;3m[SendGridModule] [39m[32mSet API Key[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:12 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:12 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSendGridModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:12 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +133ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPaymentModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRoundsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTeamsModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBetsOneLeftModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBetsRoundsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLeaguesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mNewsModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUsersController {/users}:[39m[38;5;3m +6ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users, POST} route[39m[38;5;3m +3ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserAuth {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserForgotPassword {/forgot_password}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/forgot_password, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserResetPassword {/reset_password}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reset_password, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRankingController {/ranking}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/ranking, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mSocialLogin {/social_login}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/social_login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCheckPayment {/check_payment}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/check_payment, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRoundsController {/rounds}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:league, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mTeamsController {/teams}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:league, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsOneLeftController {/betsOneLeft}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsAdminController {/betsOneLeft/admin}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/admin, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mWinningBetController {/winningBetsOneLeft}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/winningBetsOneLeft/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsController {/betsRound}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsAdminController {/betsRound/admin}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/admin, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mWinningBetController {/winningBetsRound}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/winningBetsRound/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mLeaguesController {/leagues}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mNewsController {/news}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPaymentController {/payment}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payment, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payment/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +4ms[39m
+[31m[Nest] 17829  - [39m03/22/2022, 1:28:13 AM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::3000[39m[38;5;3m +3ms[39m
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1330:16)
+    at listenInCluster (node:net:1378:12)
+    at Server.listen (node:net:1465:7)
+    at ExpressAdapter.listen (/home/ubuntu/backend-bolao/node_modules/@nestjs/platform-express/adapters/express-adapter.js:57:32)
+    at /home/ubuntu/backend-bolao/node_modules/@nestjs/core/nest-application.js:167:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/home/ubuntu/backend-bolao/node_modules/@nestjs/core/nest-application.js:156:16)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at bootstrap (/home/ubuntu/backend-bolao/src/main.ts:7:3)
+
+> bolaoapp@0.0.1 start
+> nest start
+
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +94ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[SendGridModule] [39m[32mSet API Key[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSendGridModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +103ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPaymentModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRoundsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTeamsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBetsOneLeftModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBetsRoundsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLeaguesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mNewsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUsersController {/users}:[39m[38;5;3m +6ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users, POST} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserAuth {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserForgotPassword {/forgot_password}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/forgot_password, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserResetPassword {/reset_password}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reset_password, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRankingController {/ranking}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/ranking, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mSocialLogin {/social_login}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/social_login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCheckPayment {/check_payment}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/check_payment, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRoundsController {/rounds}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:league, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mTeamsController {/teams}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:league, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsOneLeftController {/betsOneLeft}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsAdminController {/betsOneLeft/admin}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/admin, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mWinningBetController {/winningBetsOneLeft}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/winningBetsOneLeft/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsController {/betsRound}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsAdminController {/betsRound/admin}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/admin, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mWinningBetController {/winningBetsRound}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/winningBetsRound/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mLeaguesController {/leagues}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mNewsController {/news}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPaymentController {/payment}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payment, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payment/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +5ms[39m
+[31m[Nest] 27779  - [39m03/25/2022, 1:47:04 AM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::3000[39m[38;5;3m +3ms[39m
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1330:16)
+    at listenInCluster (node:net:1378:12)
+    at Server.listen (node:net:1465:7)
+    at ExpressAdapter.listen (/home/ubuntu/backend-bolao/node_modules/@nestjs/platform-express/adapters/express-adapter.js:57:32)
+    at /home/ubuntu/backend-bolao/node_modules/@nestjs/core/nest-application.js:167:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/home/ubuntu/backend-bolao/node_modules/@nestjs/core/nest-application.js:156:16)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at bootstrap (/home/ubuntu/backend-bolao/src/main.ts:7:3)
+
+> bolaoapp@0.0.1 start
+> nest start
+
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:46 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +92ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[SendGridModule] [39m[32mSet API Key[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSendGridModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +105ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPaymentModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRoundsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTeamsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBetsOneLeftModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBetsRoundsModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLeaguesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mNewsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUsersController {/users}:[39m[38;5;3m +6ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users, POST} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserAuth {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserForgotPassword {/forgot_password}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/forgot_password, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserResetPassword {/reset_password}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reset_password, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRankingController {/ranking}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/ranking, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mSocialLogin {/social_login}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/social_login, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCheckPayment {/check_payment}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/check_payment, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRoundsController {/rounds}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:league, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mTeamsController {/teams}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:league, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsOneLeftController {/betsOneLeft}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsAdminController {/betsOneLeft/admin}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/admin, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mWinningBetController {/winningBetsOneLeft}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/winningBetsOneLeft/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsController {/betsRound}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsAdminController {/betsRound/admin}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/admin, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mWinningBetController {/winningBetsRound}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/winningBetsRound/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mLeaguesController {/leagues}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mNewsController {/news}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPaymentController {/payment}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payment, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payment/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29320  - [39m03/25/2022, 9:02:47 AM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +5ms[39m
+[31m[Nest] 29320  - [39m03/25/2022, 9:03:47 AM [31m  ERROR[39m [38;5;3m[ExceptionsHandler] [39m[31minvalid input syntax for type integer: "Corinthians"[39m
+QueryFailedError: invalid input syntax for type integer: "Corinthians"
+    at QueryFailedError.TypeORMError [as constructor] (/home/ubuntu/backend-bolao/src/error/TypeORMError.ts:7:9)
+    at new QueryFailedError (/home/ubuntu/backend-bolao/src/error/QueryFailedError.ts:9:9)
+    at PostgresQueryRunner.<anonymous> (/home/ubuntu/backend-bolao/src/driver/postgres/PostgresQueryRunner.ts:247:19)
+    at step (/home/ubuntu/backend-bolao/node_modules/tslib/tslib.js:143:27)
+    at Object.throw (/home/ubuntu/backend-bolao/node_modules/tslib/tslib.js:124:57)
+    at rejected (/home/ubuntu/backend-bolao/node_modules/tslib/tslib.js:115:69)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[31m[Nest] 29320  - [39m03/25/2022, 9:07:20 AM [31m  ERROR[39m [38;5;3m[ExceptionsHandler] [39m[31mCannot read properties of undefined (reading 'status')[39m
+TypeError: Cannot read properties of undefined (reading 'status')
+    at BetsRoundsService.create (/home/ubuntu/backend-bolao/src/betsRounds/betsRounds.service.ts:40:22)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at BetsRoundsController.create (/home/ubuntu/backend-bolao/src/betsRounds/betsRounds.controller.ts:43:22)
+    at /home/ubuntu/backend-bolao/node_modules/@nestjs/core/router/router-execution-context.js:46:28
+    at /home/ubuntu/backend-bolao/node_modules/@nestjs/core/router/router-proxy.js:9:17
+Killed
+
+> bolaoapp@0.0.1 start
+> nest start
+
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +81ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[SendGridModule] [39m[32mSet API Key[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSendGridModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +100ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPaymentModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRoundsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTeamsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBetsOneLeftModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBetsRoundsModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLeaguesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mNewsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUsersController {/users}:[39m[38;5;3m +6ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users, POST} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/users/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserAuth {/auth}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserForgotPassword {/forgot_password}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/forgot_password, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserResetPassword {/reset_password}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/reset_password, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRankingController {/ranking}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/ranking, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mSocialLogin {/social_login}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/social_login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCheckPayment {/check_payment}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/check_payment, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRoundsController {/rounds}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:league, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rounds/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mTeamsController {/teams}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:league, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/teams/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsOneLeftController {/betsOneLeft}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsAdminController {/betsOneLeft/admin}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsOneLeft/admin, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mWinningBetController {/winningBetsOneLeft}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/winningBetsOneLeft/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsController {/betsRound}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBetsRoundsAdminController {/betsRound/admin}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/betsRound/admin, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mWinningBetController {/winningBetsRound}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/winningBetsRound/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mLeaguesController {/leagues}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/leagues/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mNewsController {/news}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/news/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPaymentController {/payment}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payment, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payment/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 29792  - [39m03/25/2022, 11:08:05 AM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +4ms[39m
+[31m[Nest] 29792  - [39m03/25/2022, 11:09:05 AM [31m  ERROR[39m [38;5;3m[ExceptionsHandler] [39m[31mCannot read properties of undefined (reading 'status')[39m
+TypeError: Cannot read properties of undefined (reading 'status')
+    at BetsRoundsService.create (/home/ubuntu/backend-bolao/src/betsRounds/betsRounds.service.ts:40:22)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at BetsRoundsController.create (/home/ubuntu/backend-bolao/src/betsRounds/betsRounds.controller.ts:43:22)
+    at /home/ubuntu/backend-bolao/node_modules/@nestjs/core/router/router-execution-context.js:46:28
+    at /home/ubuntu/backend-bolao/node_modules/@nestjs/core/router/router-proxy.js:9:17
+Killed

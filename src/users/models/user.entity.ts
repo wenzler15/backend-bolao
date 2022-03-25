@@ -20,22 +20,22 @@ export class UserEntity {
     @Column({ type: 'integer', default: 0 })
     favoriteTeam: number;
 
-    @Column({ type: 'integer', default: 0 })
+    @Column({ default: '' })
     codeArea: string;
 
-    @Column({ type: 'integer', default: 0 })
+    @Column({ default: '' })
     phone: string;
 
-    @Column({ default: 0 })
+    @Column({ default: '' })
     zipCode: string;
 
-    @Column({ default: 0 })
+    @Column({ default: '' })
     streetName: string;
 
     @Column({ type: 'integer', default: 0 })
     houseNumber: number;
 
-    @Column({ type: 'integer', default: 0 })
+    @Column({ default: '' })
     cpf: string;
 
     @Column({ type: 'integer', default: 0 })
