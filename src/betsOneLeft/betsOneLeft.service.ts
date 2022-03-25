@@ -32,7 +32,7 @@ export class BetsOneLeftService {
     });
 
     if (payment[0]) {
-      if (payment[0].status === 'aprovado') {
+      if (payment[0].status === 'aprovado' && payment[0].gameMode === 2 || payment[0].gameMode === 3) {
         const betLeftOneExists = await this.betOneLeftRepository.findOne({
           userId,
           matchId,
@@ -46,7 +46,6 @@ export class BetsOneLeftService {
           order: { createdAt: 'DESC' },
         });
 
-        
         if (lastBet && lastBet.life === 0)
         return { message: "This user don't have more lifes!" };
         

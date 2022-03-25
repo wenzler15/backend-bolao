@@ -27,7 +27,7 @@ export class BetsRoundsService {
 
     const rounds = await this.roundRepository.find({ matchId });
 
-    const payment = await this.paymentRepository.find({
+    const payment = await this.paymentRepository.findOne({
       where: {
         leagueId: rounds[0].leagueId,
         userId,
@@ -37,7 +37,7 @@ export class BetsRoundsService {
     const firstBet = await this.betRoundRepository.findOne({ userId });
 
     if (payment[0] || !firstBet) {
-      if (payment[0].status === 'aprovado' || !firstBet) {
+      if (payment[0] && payment[0].status === 'aprovado' && payment[0].gameMode === 1 || payment[0].gameMode === 3 || !firstBet) {
         const betExits = await this.betRoundRepository.findOne({
           userId,
           matchId,

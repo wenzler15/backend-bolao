@@ -11,6 +11,9 @@ export class PaymentEntity {
     @Column({ type: 'integer' ,default: 0})
     leagueId: number;
 
+    @Column({ type: 'integer' ,default: 0 })
+    gameMode: number;
+
     @Column({ type: 'integer' ,default: 0})
     round: number;
 
