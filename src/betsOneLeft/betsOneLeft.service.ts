@@ -13,11 +13,29 @@ export class BetsOneLeftService {
   ) {}
 
   async create(betOneLeft: BetOneLeft) {
-    // const round = betOneLeft.round;
+    const userId = betOneLeft.userId;
+    const winnerTeamId = betOneLeft.winnerTeamId;
+    const matchId = betOneLeft.matchId;
 
-    // const betLeftOneExists = await this.betOneLeftRepository.findOne({ where: { round } });
+    const betLeftOneExists = await this.betOneLeftRepository.findOne({
+      where: { userId, matchId },
+    });
 
-    // if (betLeftOneExists) return { message: 'Bet left one already exists' };
+    if (betLeftOneExists)
+      return {
+        message:
+          'Bet already placed on this match, please bet on another match',
+      };
+
+    const betLeftOneTeamExists = await this.betOneLeftRepository.findOne({
+      where: { userId, winnerTeamId },
+    });
+
+    if (betLeftOneTeamExists)
+      return {
+        message:
+          'Bet already placed on this team, please bet on another team to win',
+      };
 
     const response = await this.betOneLeftRepository.save(betOneLeft);
 
@@ -25,17 +43,16 @@ export class BetsOneLeftService {
   }
 
   async adminAprove(body: AdminAproveEntity) {
-    const {id} = body;
-    const bet = await this.betOneLeftRepository.findOne({where: {id}});
+    const { id } = body;
+    const bet = await this.betOneLeftRepository.findOne({ where: { id } });
 
     await this.betOneLeftRepository.save({
       ...bet,
       ...body,
     });
 
-    return {message: "Bet updated!"}
+    return { message: 'Bet updated!' };
   }
-
 
   findAll() {
     return this.betOneLeftRepository.find();

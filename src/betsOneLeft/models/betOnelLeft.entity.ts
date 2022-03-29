@@ -18,14 +18,14 @@ export class BetOneLeftEntity {
   @Column({ type: 'integer', default: 0 })
   matchId: number;
 
-  @Column({ type: 'integer', default: 0 })
-  homeTeamScore: number;
+  // @Column({ type: 'integer', default: 0 })
+  // homeTeamScore: number;
+
+  // @Column({ type: 'integer', default: 0 })
+  // awayTeamScore: number;
 
   @Column({ type: 'integer', default: 0 })
-  awayTeamScore: number;
-
-  @Column({ default: '' })
-  winnerTeam: string;
+  winnerTeamId: number;
 
   @Column({ default: false })
   status: boolean;
