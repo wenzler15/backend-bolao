@@ -32,56 +32,54 @@ export class BetsOneLeftService {
     });
 
     // if (payment[0]) {
-      // if (payment[0].status === 'aprovado' && payment[0].gameMode === 2 || payment[0].gameMode === 3) {
-        const betLeftOneExists = await this.betOneLeftRepository.findOne({
-          userId,
-          matchId,
-        });
+    // if (payment[0].status === 'aprovado' && payment[0].gameMode === 2 || payment[0].gameMode === 3) {
+    const betLeftOneExists = await this.betOneLeftRepository.findOne({
+      userId,
+      matchId,
+    });
 
-        if (betLeftOneExists)
-          return { message: 'This user has already betted in this match!' };
+    if (betLeftOneExists)
+      return { message: 'This user has already betted in this match!' };
 
-        const lastBet = await this.betOneLeftRepository.findOne({
-          where: { userId },
-          order: { createdAt: 'DESC' },
-        });
+    const lastBet = await this.betOneLeftRepository.findOne({
+      where: { userId },
+      order: { createdAt: 'DESC' },
+    });
 
-        if (lastBet && lastBet.life === 0)
-        return { message: "This user don't have more lifes!" };
-        
-        const round = await this.roundsRepository.findOne({ matchId: matchId });
-        
-        const betLeftOneTeamExists = await this.betOneLeftRepository.findOne({
-          where: { userId, winnerTeamId },
-        });
-    
-        if (betLeftOneTeamExists)
-          return {
-            message:
-              'Bet already placed on this team, please bet on another team to win',
-          };    
-      
-        if (moment().utc() < round.dateRoundLocked) {
-          return { message: 'Bet round locked' };
-        } else { 
-          
-          if (!lastBet && rounds[0].round >= 7) {
-            betOneLeft.life = 2;
-            const response = await this.betOneLeftRepository.save(betOneLeft);
-            
-            return { message: 'Bet left one created', betLeftOne: response };
-          } else {            
-            const response = await this.betOneLeftRepository.save(betOneLeft);
-            
-            return { message: 'Bet left one created', betLeftOne: response };
-          }
+    if (lastBet && lastBet.life === 0)
+      return { message: "This user don't have more lifes!" };
 
-        }
-      // } else if (payment[0].status === 'processando') {
-      //   return { message: 'Processing payment!' };
-      // } else {
-      //   return { message: 'Paymente denied!' };
-      // }
+    const round = await this.roundsRepository.findOne({ matchId: matchId });
+
+    const betLeftOneTeamExists = await this.betOneLeftRepository.findOne({
+      where: { userId, winnerTeamId },
+    });
+
+    if (betLeftOneTeamExists)
+      return {
+        message:
+          'Bet already placed on this team, please bet on another team to win',
+      };
+
+    if (moment().utc() < round.dateRoundLocked) {
+      return { message: 'Bet round locked' };
+    } else {
+      if (!lastBet && rounds[0].round >= 7) {
+        betOneLeft.life = 2;
+        const response = await this.betOneLeftRepository.save(betOneLeft);
+
+        return { message: 'Bet left one created', betLeftOne: response };
+      } else {
+        const response = await this.betOneLeftRepository.save(betOneLeft);
+
+        return { message: 'Bet left one created', betLeftOne: response };
+      }
+    }
+    // } else if (payment[0].status === 'processando') {
+    //   return { message: 'Processing payment!' };
+    // } else {
+    //   return { message: 'Paymente denied!' };
+    // }
     // } else {
     //   return { message: 'Payment not found!' };
     // }

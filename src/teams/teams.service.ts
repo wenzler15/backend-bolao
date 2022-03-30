@@ -39,6 +39,7 @@ export class TeamsService {
             leagueId: response.data.competition.id,
             teamId: element.id,
             teamName: element.name,
+            teamEmblemUrl: element.crestUrl ? element.crestUrl : null,
           };
 
           this.teamRepository.save(data);
