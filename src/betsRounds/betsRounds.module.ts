@@ -10,9 +10,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from 'src/users/models/user.entity';
 import { RoundEntity } from 'src/rounds/models/round.entity';
 import { PaymentEntity } from 'src/payment/models/payment.entity';
+import { NotificationEntity } from 'src/notifications/models/notifications.entity';
 @Module({
   imports: [
-    TypeOrmModule.forFeature([BetRoundEntity, UserEntity, RoundEntity, PaymentEntity]),
+    TypeOrmModule.forFeature([BetRoundEntity, UserEntity, RoundEntity, PaymentEntity, NotificationEntity]),
   ],
   controllers: [
     BetsRoundsController,

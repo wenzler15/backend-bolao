@@ -10,6 +10,7 @@ import { BetsRoundsModule } from './betsRounds/betsRounds.module';
 import { LeaguesModule } from './leagues/leagues.module';
 import { NewsModule } from './news/news.module';
 import { PaymentModule } from './payment/payment.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { PaymentModule } from './payment/payment.module';
     LeaguesModule,
     NewsModule,
     PaymentModule,
+    NotificationsModule,
   ],
   controllers: [],
   providers: [],

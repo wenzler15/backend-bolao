@@ -7,6 +7,8 @@ import { BetOneLeft } from './models/betOneLeft.interface';
 import { AdminAproveEntity } from './models/adminAprove.entity';
 import { RoundEntity } from 'src/rounds/models/round.entity';
 import { PaymentEntity } from 'src/payment/models/payment.entity';
+import { UserEntity } from 'src/users/models/user.entity';
+import { NotificationEntity } from 'src/notifications/models/notifications.entity';
 const moment = require('moment');
 @Injectable()
 export class BetsOneLeftService {
@@ -17,6 +19,10 @@ export class BetsOneLeftService {
     private readonly roundsRepository: Repository<RoundEntity>,
     @InjectRepository(PaymentEntity)
     private readonly paymentRepository: Repository<PaymentEntity>,
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+    @InjectRepository(NotificationEntity)
+    private readonly notificationRepository: Repository<NotificationEntity>
   ) {}
 
   async create(betOneLeft: BetOneLeft) {
@@ -90,14 +96,23 @@ export class BetsOneLeftService {
   async adminAprove(body: AdminAproveEntity) {
     const { id } = body;
     let winner = 0;
-    const bet = await this.betOneLeftRepository.findOne({ where: { id } });
-
+    const bet = await this.betOneLeftRepository.findOne({ id });
+    
     if (!bet) return { message: 'Bet not found!' };
 
     if (bet.status) return { message: 'Bet has already been updated!' };
 
     const round = await this.roundsRepository.findOne({ matchId: bet.matchId });
     const betAtt = bet;
+
+    const notification = {
+      userId: bet.userId,
+      read: 0,
+      message: "Jogo finalizado!",
+      gameMode: "Resta 1"
+    }
+    
+    await this.notificationRepository.save(notification);
 
     if (round.awayTeamScore > round.homeTeamScore) {
       winner = round.awayTeamId;
@@ -109,6 +124,24 @@ export class BetsOneLeftService {
 
     if (winner !== bet.winnerTeamId) {
       betAtt.life -= 1;
+    } else {
+      const user = await this.userRepository.findOne({ where: { id: bet.userId}});
+      let newPoints = user;
+      newPoints.winsNumberLeftOne += 1;
+
+      await this.userRepository.save({
+        ...user,
+        ...newPoints
+      });
+
+      const notification = {
+        userId: bet.userId,
+        read: 0,
+        message: "Parabéns você acertou o vencedor do jogo!",
+        gameMode: "Resta 1"
+      }
+      
+      await this.notificationRepository.save(notification);
     }
 
     betAtt.status = true;

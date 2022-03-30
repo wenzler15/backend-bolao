@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { NotificationEntity } from 'src/notifications/models/notifications.entity';
 import { PaymentEntity } from 'src/payment/models/payment.entity';
 import { RoundEntity } from 'src/rounds/models/round.entity';
 import { UserEntity } from 'src/users/models/user.entity';
@@ -20,6 +21,8 @@ export class BetsRoundsService {
     private readonly roundRepository: Repository<RoundEntity>,
     @InjectRepository(PaymentEntity)
     private readonly paymentRepository: Repository<PaymentEntity>,
+    @InjectRepository(NotificationEntity)
+    private readonly notificationRepository: Repository<NotificationEntity>
   ) {}
 
   async create(betRound: BetRound) {
@@ -63,7 +66,6 @@ export class BetsRoundsService {
     // } else {
     //   return { message: 'Payment not found!' };
     // }
-  }
 
   async adminAprove(body: AdminAproveEntity) {
     const { id } = body;
@@ -71,9 +73,19 @@ export class BetsRoundsService {
 
     const bet = await this.betRoundRepository.findOne({ where: { id } });
 
+    
     if (bet.status) return { message: 'This bet has already been updated!' };
-
+    
     const user = await this.userRepository.findOne({ id: bet.userId });
+
+    const notification = {
+      userId: bet.userId,
+      read: 0,
+      message: "Jogo finalizado!",
+      gameMode: "Semanal"
+    }
+    
+    await this.notificationRepository.save(notification);
 
     const round = await this.roundRepository.findOne({ matchId: bet.matchId });
 
@@ -93,11 +105,32 @@ export class BetsRoundsService {
       bet.homeTeamScore === round.homeTeamScore &&
       winner != 0
     ) {
-      points += 100;
+      if(round.awayTeamId === user.favoriteTeam) {
+        points += 100;
+      } else {
+        points += 80;
+      }
+      updateUser.winsNumber += 1;
+
+      const notificationWinner = {
+        userId: bet.userId,
+        read: 0,
+        message: "Parabéns, você acertou o placar do jogo!"
+      }
+
+      await this.notificationRepository.save(notificationWinner);
     } else if (bet.winnerTeam === 0 && winner === 0) {
-      points += 60;
+      points += 40;
     } else if (bet.winnerTeam == winner) {
-      points += 80;
+      points += 60;
+      
+      const notificationWinner = {
+        userId: bet.userId,
+        read: 0,
+        message: "Você acertou o vencedor!"
+      }
+
+      await this.notificationRepository.save(notificationWinner);
     }
 
     if (

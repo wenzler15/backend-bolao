@@ -21,6 +21,8 @@ export interface User {
     createdAt?: Date;
     facebookToken?: string;
     googleToken?: string;
+    winsNumberLeftOne?: number;
+    winsNumber?: number;
     passwordResetToken?: string;
     passwordResetExpires?: Date;
 }

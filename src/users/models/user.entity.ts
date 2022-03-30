@@ -59,6 +59,12 @@ export class UserEntity {
   @Column({ type: 'integer', default: 0 })
   favoriteTeam: number;
 
+  @Column({ type: 'integer', default: 0 })
+  winsNumberLeftOne: number;
+
+  @Column({ type: 'integer', default: 0 })
+  winsNumber: number;
+
   @Column({ default: '' })
   passwordResetToken: string;
 
