@@ -6,6 +6,7 @@ export interface BetRound {
   homeTeamId: number;
   homeTeamScore?: number;
   awayTeamScore?: number;
-  winnerTeam?: string;
+  matchId?: number;
+  winnerTeam?: number;
   status?: boolean;
 }

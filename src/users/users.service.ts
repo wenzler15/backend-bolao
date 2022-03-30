@@ -3,6 +3,9 @@
 import { SendGridService } from '@anchan828/nest-sendgrid';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { BetOneLeftEntity } from 'src/betsOneLeft/models/betOnelLeft.entity';
+import { BetRoundEntity } from 'src/betsRounds/models/betRounds.entity';
+import { PaymentEntity } from 'src/payment/models/payment.entity';
 import { Repository } from 'typeorm';
 import { AuthEntity } from './models/auth.entity';
 import { ResetPasswordEntity } from './models/resetPassword.entity';
@@ -11,16 +14,18 @@ import { User } from './models/user.interface';
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const axios = require('axios')
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
+    @InjectRepository(PaymentEntity)
+    private readonly paymentRepository: Repository<PaymentEntity>,
     private readonly sendGird: SendGridService) {}
 
   async create(user: User) {
-    const email = user.email;
+    const {email, name, lastName} = user;
 
     const userExists = await this.userRepository.findOne({ where: {email}}); 
 
@@ -28,7 +33,7 @@ export class UsersService {
       return {message: "User already exists"}
 
     const response = await this.userRepository.save(user);
-    
+
     response.password = undefined;
     response.passwordResetExpires = undefined;
     response.passwordResetToken = undefined;
@@ -77,11 +82,11 @@ export class UsersService {
   response.passwordResetExpires = undefined;
   response.passwordResetToken = undefined;
 
-  return {message: "User updated", user: response};
+  return {message: "User updated", user: response}
   }
 
   remove(id: string) {
-    return {message: "User deleted" ,data: this.userRepository.delete(id)}
+    return {message: "User deleted" , data: this.userRepository.delete(id)}
   }
 
   async auth(body: AuthEntity) {
@@ -138,6 +143,58 @@ export class UsersService {
     });
 
     return  {message: "Token sent"}
+  }
+
+  async checkPayment(body: any) {
+    const {userId, leagueId} = body;
+    if(body.gameMode === 1) {
+      const status = await this.paymentRepository.findOne({ userId, leagueId });
+
+      if(!status) 
+        return {message: 'Payment not found!'}
+
+      return {message: status.status};
+    } else {
+      const status = await this.paymentRepository.findOne({ userId, leagueId, round: body.round });
+
+      if(!status) 
+        return {message: 'Payment not found!'}
+
+      return {message: status.status};
+    }
+  }
+
+  async loginSocial(body: any) {
+    const email = body.email;
+    const user = await this.userRepository.findOne({ where: {email}});
+    if(body.facebook_token) {
+      if(body.facebook_token === user.facebookToken) {
+        return {message: "Correct token!"}
+      }
+      return {message: "Incorrect token!"}
+    } else {
+      if(body.google_token === user.googleToken) {
+        return {message: "Correct token!"}
+      }
+      return {message: "Incorrect token!"}
+    } 
+  }
+
+  async getRanking() {
+    const response = await this.userRepository.find({
+      select: ["name", "favoriteTeam", "points"],
+      order: {
+        points: "DESC"
+      }
+    });
+
+    response.forEach((item) => {
+      item.password = undefined;
+      item.passwordResetExpires = undefined;
+      item.passwordResetToken = undefined;
+    })
+
+    return response;
   }
 
   async resetPassword(body: ResetPasswordEntity) {

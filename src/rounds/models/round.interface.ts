@@ -9,5 +9,6 @@ export interface Round {
   awayTeamId?: string;
   awayTeamScore?: number;
   dateRound?: Date;
+  dateRoundLocked?: Date;
   status?: string;
 }

@@ -14,11 +14,35 @@ export class UserEntity {
   @Column({ default: '' })
   password: string;
 
+  @Column({ default: ''})
+  lastName: string;
+
   @Column({ default: '' })
   pix: string;
 
   @Column({ default: '' })
   cpf: string;
+
+  @Column({ default: '' })
+  codeArea: string;
+
+  @Column({ default: '' })
+  phone: string;
+
+  @Column({ default: '' })
+  zipCode: string;
+
+  @Column({ default: '' })
+  streetName: string;
+
+  @Column({ type: 'integer', default: 0 })
+  houseNumber: number;
+
+  @Column({ type: 'integer', default: 0 })
+  points: number;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  createdAt: Date;
 
   @Column({ default: '' })
   bankName: string;
@@ -35,9 +59,6 @@ export class UserEntity {
   @Column({ type: 'integer', default: 0 })
   favoriteTeam: number;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
-
   @Column({ default: '' })
   passwordResetToken: string;
 
@@ -46,4 +67,9 @@ export class UserEntity {
 
   @Column({ type: 'timestamp', nullable: true })
   passwordResetExpires: Date;
+
+  @Column({default: '', nullable: true})
+  googleToken: string;
 }
+
+

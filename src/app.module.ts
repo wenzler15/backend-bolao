@@ -7,6 +7,9 @@ import { RoundsModule } from './rounds/rounds.module';
 import { TeamsModule } from './teams/teams.module';
 import { BetsOneLeftModule } from './betsOneLeft/betsOneLeft.module';
 import { BetsRoundsModule } from './betsRounds/betsRounds.module';
+import { LeaguesModule } from './leagues/leagues.module';
+import { NewsModule } from './news/news.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -29,6 +32,9 @@ import { BetsRoundsModule } from './betsRounds/betsRounds.module';
     TeamsModule,
     BetsOneLeftModule,
     BetsRoundsModule,
+    LeaguesModule,
+    NewsModule,
+    PaymentModule,
   ],
   controllers: [],
   providers: [],

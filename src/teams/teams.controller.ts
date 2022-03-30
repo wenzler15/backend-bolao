@@ -16,10 +16,10 @@ import { TeamsService } from './teams.service';
 export class TeamsController {
   constructor(private readonly teamsService: TeamsService) {}
 
-  @Post()
-  async create(@Body() post: Team) {
+  @Post(':league')
+  async create(@Param('league') league: number, @Body() post: Team) {
 
-    const response = await this.teamsService.create(post);
+    const response = await this.teamsService.create(league, post);
 
     return response;
   }

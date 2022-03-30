@@ -11,19 +11,10 @@ export class BetOneLeftEntity {
 
   @Column({ type: 'integer', default: 3 })
   life: number;
-
-  @Column({ type: 'integer', default: 0 })
-  round: number;
-
+  
   @Column({ type: 'integer', default: 0 })
   matchId: number;
-
-  // @Column({ type: 'integer', default: 0 })
-  // homeTeamScore: number;
-
-  // @Column({ type: 'integer', default: 0 })
-  // awayTeamScore: number;
-
+  
   @Column({ type: 'integer', default: 0 })
   winnerTeamId: number;
 

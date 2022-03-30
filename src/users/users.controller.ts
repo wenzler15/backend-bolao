@@ -9,7 +9,6 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { subscriptionLogsToBeFn } from 'rxjs/internal/testing/TestScheduler';
 import { AuthEntity } from './models/auth.entity';
 import { ResetPasswordEntity } from './models/resetPassword.entity';
 import { User } from './models/user.interface';
@@ -26,6 +25,26 @@ export class UserAuth {
   }
 }
 
+@Controller('check_payment')
+export class CheckPayment {
+  constructor(private readonly usersService: UsersService) {}
+
+  @Post()
+  checkPayment(@Body() body: any) {
+    return this.usersService.checkPayment(body);
+  }
+}
+
+@Controller('social_login')
+export class SocialLogin {
+  constructor(private readonly usersService: UsersService) {}
+  
+  @Post()
+  loginSocial(@Body() body: any) {
+    return this.usersService.loginSocial(body);
+  }
+}
+
 @Controller('forgot_password')
 export class UserForgotPassword {
   constructor(private readonly usersService: UsersService) {}
@@ -35,6 +54,16 @@ export class UserForgotPassword {
     return this.usersService.forgotPassword(email.email);
   }
 }
+
+@Controller('ranking')
+export class RankingController {
+  constructor(private readonly usersService: UsersService) {}
+
+  @Get()
+  raking() {
+    return this.usersService.getRanking();
+  }
+} 
 
 @Controller('reset_password')
 export class UserResetPassword {

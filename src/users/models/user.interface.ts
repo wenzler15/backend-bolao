@@ -4,15 +4,23 @@ export interface User {
     email?: string;
     name?: string;
     pix?: string;
-    cpf?: string;
     bankName?: string;
     agencyNumber?: string;
     accountNumber?: string;
     accountType?: string;
+    lastName?: string;
+    codeArea?: string;
+    phone?: string;
+    cpf?: string;
+    zipCode?: string;
+    streetName?: string;
+    houseNumber?: number;
     favoriteTeam?: number;
     password?: string;
+    points?: number;
     createdAt?: Date;
     facebookToken?: string;
+    googleToken?: string;
     passwordResetToken?: string;
     passwordResetExpires?: Date;
 }
