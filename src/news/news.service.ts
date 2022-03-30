@@ -4,12 +4,38 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { NewsEntity } from './models/news.entity';
 import { News } from './models/news.interface';
+import { Cron } from '@nestjs/schedule';
+const { parse } = require('rss-to-json');
+
+// cron.schedule("* * * * *",  async () => {
+
+
+// });
 @Injectable()
 export class NewsService {
   constructor(
     @InjectRepository(NewsEntity)
     private readonly newsRepository: Repository<NewsEntity>,
   ) {}
+
+  @Cron('45 * * * * *')
+  async handleCron() {
+    let rss = await parse("https://www.gazetaesportiva.com/times/feed/");
+  
+    rss.items.forEach( async (item) => {
+      const exists = await this.newsRepository.findOne({ where: { title: item.title}});
+
+      if(exists) return;
+
+      const data = {
+        title: item.title,
+        url: item.link
+      };
+
+      await this.newsRepository.save(data);
+    });
+    console.log("salvo");
+  }
 
   async create(news: News) {
     const title = news.title;
@@ -31,8 +57,20 @@ export class NewsService {
     });
   }
 
-  findOne(id: string) {
-    return this.newsRepository.findByIds([id]);
+  async findOne(id: string) {
+    let rss = await parse(`https://www.gazetaesportiva.com/times/${id}/feed/`);
+  
+    let data = [];
+
+    rss.items.forEach( async (item) => {
+      const toData = {        
+        title: item.title,
+        link: item.link
+      }
+      data.push(toData)
+    });
+
+    return data;
   }
 
   async update(id: string, updateNewsDto: News) {
