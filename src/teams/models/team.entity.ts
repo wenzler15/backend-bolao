@@ -15,6 +15,9 @@ export class TeamEntity {
   @Column({ default: '' })
   teamName: string;
 
+  @Column({ default: null })
+  teamEmblemUrl : string;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 }

@@ -40,32 +40,31 @@ export class BetsRoundsService {
     const firstBet = await this.betRoundRepository.findOne({ userId });
 
     // if (payment[0] || !firstBet) {
-      // if (payment[0] && payment[0].status === 'aprovado' && payment[0].gameMode === 1 || payment[0].gameMode === 3 || !firstBet) {
-        const betExits = await this.betRoundRepository.findOne({
-          userId,
-          matchId,
-        });
+    // if (payment[0] && payment[0].status === 'aprovado' && payment[0].gameMode === 1 || payment[0].gameMode === 3 || !firstBet) {
+    const betExits = await this.betRoundRepository.findOne({
+      userId,
+      matchId,
+    });
 
-        if (betExits)
-          return { message: 'User had already betted in this match!' };
+    if (betExits) return { message: 'User had already betted in this match!' };
 
-        const round = await this.roundRepository.findOne({ matchId: matchId });
+    const round = await this.roundRepository.findOne({ matchId: matchId });
 
-        if (moment().utc() < round.dateRoundLocked) {
-          return { message: 'Bet round locked' };
-        } else {
-          const response = await this.betRoundRepository.save(betRound);
+    if (moment().utc() < round.dateRoundLocked) {
+      return { message: 'Bet round locked' };
+    } else {
+      const response = await this.betRoundRepository.save(betRound);
 
-          return { message: 'Bet round created', betRound: response };
-        }
-      // } else if (payment[0].status === 'processando') {
-      //   return { message: 'Processing payment!' };
-      // } else {
-        return { message: 'Paymente denied!' };
-      }
+      return { message: 'Bet round created', betRound: response };
+    }
+    // } else if (payment[0].status === 'processando') {
+    //   return { message: 'Processing payment!' };
     // } else {
-    //   return { message: 'Payment not found!' };
-    // }
+    return { message: 'Paymente denied!' };
+  }
+  // } else {
+  //   return { message: 'Payment not found!' };
+  // }
 
   async adminAprove(body: AdminAproveEntity) {
     const { id } = body;
@@ -156,7 +155,7 @@ export class BetsRoundsService {
     return { message: 'Bet updated!' };
   }
 
-  findAll() {
+  async findAll() {
     return this.betRoundRepository.find();
   }
 
