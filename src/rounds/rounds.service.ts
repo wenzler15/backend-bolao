@@ -60,13 +60,56 @@ export class RoundsService {
     return { message: 'Data of the rounds inserted in the tables' };
   }
 
-  findAll() {
-    return this.roundRepository.find({
+  async findAll() {
+    let firstDate = moment(new Date()),
+      // secondDate = new Date('2022-04-01 20:00:00.000'),
+      currentDate = moment().format('dddd'),
+      difference = 0;
+    // timeDifference = moment.duration(firstDate.diff(secondDate));
+
+    switch (currentDate) {
+      case 'Sunday':
+        difference = 7;
+        break;
+      case 'Monday':
+        difference = 6;
+        break;
+      case 'Tuesday':
+        difference = 5;
+        break;
+      case 'Wednesday':
+        difference = 4;
+        break;
+      case 'Thursday':
+        difference = 3;
+        break;
+      case 'Friday':
+        difference = 2;
+        break;
+      case 'Saturday':
+        difference = 1;
+        break;
+    }
+
+    const rounds = await this.roundRepository.find({
       order: {
         round: 'ASC',
         dateRound: 'ASC',
       },
     });
+
+    const response = [];
+
+    rounds.forEach((item) => {
+      const secondDate = item.dateRound;
+      const timeDifference = moment.duration(firstDate.diff(secondDate));
+
+      if (Math.abs(Math.floor(timeDifference.asDays())) <= difference) {
+        response.push(item);
+      }
+    });
+
+    return response;
   }
 
   findOne(id: string) {

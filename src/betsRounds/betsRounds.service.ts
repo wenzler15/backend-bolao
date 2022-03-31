@@ -121,7 +121,7 @@ export class BetsRoundsService {
     return { message: 'Bet updated!' };
   }
 
-  findAll() {
+  async findAll() {
     return this.betRoundRepository.find();
   }
 

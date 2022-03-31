@@ -7,6 +7,7 @@ import {
   Body,
   Patch,
   Param,
+  Headers,
   Delete,
 } from '@nestjs/common';
 import { BetRound } from './models/betRounds.interface';
