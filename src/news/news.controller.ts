@@ -14,17 +14,6 @@ import { Repository } from 'typeorm';
 import { NewsEntity } from './models/news.entity';
 import { News } from './models/news.interface';
 import { NewsService } from './news.service';
-const cron = require("node-cron");
-const { parse } = require('rss-to-json');
-
-cron.schedule("* * * * *",  async () => {
-  let rss = await parse("https://www.gazetaesportiva.com/times/corinthians/feed/");
-  
-  rss.items.forEach((item) => {
-    
-  });
-
-});
 @Controller('news')
 export class NewsController {
   constructor(private readonly newsService: NewsService) {}

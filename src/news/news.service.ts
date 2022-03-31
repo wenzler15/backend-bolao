@@ -7,10 +7,6 @@ import { News } from './models/news.interface';
 import { Cron } from '@nestjs/schedule';
 const { parse } = require('rss-to-json');
 
-// cron.schedule("* * * * *",  async () => {
-
-
-// });
 @Injectable()
 export class NewsService {
   constructor(
@@ -18,7 +14,7 @@ export class NewsService {
     private readonly newsRepository: Repository<NewsEntity>,
   ) {}
 
-  @Cron('45 * * * * *')
+  @Cron('0 */12 * * *')
   async handleCron() {
     let rss = await parse("https://www.gazetaesportiva.com/times/feed/");
   
