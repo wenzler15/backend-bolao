@@ -3,9 +3,11 @@
 import { SendGridService } from '@anchan828/nest-sendgrid';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { match } from 'assert';
 import { BetOneLeftEntity } from 'src/betsOneLeft/models/betOnelLeft.entity';
 import { BetRoundEntity } from 'src/betsRounds/models/betRounds.entity';
 import { PaymentEntity } from 'src/payment/models/payment.entity';
+import { RoundEntity } from 'src/rounds/models/round.entity';
 import { Repository } from 'typeorm';
 import { AuthEntity } from './models/auth.entity';
 import { ResetPasswordEntity } from './models/resetPassword.entity';
@@ -22,6 +24,10 @@ export class UsersService {
     private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(PaymentEntity)
     private readonly paymentRepository: Repository<PaymentEntity>,
+    @InjectRepository(BetOneLeftEntity)
+    private readonly betOneLeftRepository: Repository<BetOneLeftEntity>,
+    @InjectRepository(RoundEntity)
+    private readonly roundRepository: Repository<RoundEntity>,
     private readonly sendGird: SendGridService) {}
 
   async create(user: User) {
@@ -180,21 +186,65 @@ export class UsersService {
     } 
   }
 
-  async getRanking() {
-    const response = await this.userRepository.find({
-      select: ["name", "favoriteTeam", "points"],
-      order: {
-        points: "DESC"
-      }
-    });
+  async getRanking(id: number, league: number) {
+    let response = [];
 
-    response.forEach((item) => {
-      item.password = undefined;
-      item.passwordResetExpires = undefined;
-      item.passwordResetToken = undefined;
+    if (!league) {
+      response = await this.userRepository.find({
+        select: ["name", "favoriteTeam", "points", "id"],
+        order: {
+          points: "DESC"
+        }
+      });
+
+    let userRanking = [];
+
+    response.forEach((item, index) => {     
+        if(item.id == id) {
+          userRanking.push(item);
+        }
+      
+      item.position = index + 1;
     })
 
-    return response;
+    const respUser = {
+      userRanking, 
+      generalRanking: response
+    }
+
+    return respUser;
+    } else {
+      response = await this.betOneLeftRepository
+      .createQueryBuilder("betLeftOne")
+      .innerJoinAndSelect("user", "user", 'user.id = betLeftOne.userId')
+      .innerJoinAndSelect("round", 'round', 'round.matchId = betLeftOne.matchId')
+      .select(["betLeftOne.userId, betLeftOne.life, betLeftOne.matchId, user.name, user.favoriteTeam, round.leagueId"])
+      // .groupBy("betLeftOne.userId")
+      .orderBy("betLeftOne.life", "DESC")
+      .getRawMany();
+      
+      let userRanking = [];
+      let generalRanking = [];
+
+      response.forEach( async (item, index) => {        
+        if(item.leagueId == league) {
+          if(item.userId == id) {
+            userRanking.push(item);
+          }
+          
+          item.position = index + 1;
+          generalRanking.push(item);
+        }
+      })
+  
+  
+      const respUser = {
+        userRanking, 
+        generalRanking: generalRanking
+      }
+  
+      return respUser;
+     } 
   }
 
   async resetPassword(body: ResetPasswordEntity) {

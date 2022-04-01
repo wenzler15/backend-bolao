@@ -5,6 +5,7 @@ export interface User {
     name?: string;
     pix?: string;
     bankName?: string;
+    position?: number;
     agencyNumber?: string;
     accountNumber?: string;
     accountType?: string;

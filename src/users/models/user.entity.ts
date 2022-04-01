@@ -8,6 +8,9 @@ export class UserEntity {
   @Column({ default: '' })
   email: string;
 
+  @Column({ type: 'integer' ,default: 0})
+  position: number;
+
   @Column({ default: '' })
   name: string;
 

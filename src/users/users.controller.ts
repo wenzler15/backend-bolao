@@ -8,6 +8,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { AuthEntity } from './models/auth.entity';
 import { ResetPasswordEntity } from './models/resetPassword.entity';
@@ -60,8 +61,8 @@ export class RankingController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  raking() {
-    return this.usersService.getRanking();
+  raking(@Query('id') id: number, @Query('league') league: number) {
+    return this.usersService.getRanking(id, league);
   }
 } 
 

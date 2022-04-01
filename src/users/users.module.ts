@@ -6,10 +6,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BetOneLeftEntity } from 'src/betsOneLeft/models/betOnelLeft.entity';
 import { BetRoundEntity } from 'src/betsRounds/models/betRounds.entity';
 import { PaymentEntity } from 'src/payment/models/payment.entity';
+import { RoundEntity } from 'src/rounds/models/round.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserEntity, PaymentEntity])
+    TypeOrmModule.forFeature([UserEntity, PaymentEntity, BetOneLeftEntity, RoundEntity])
   ],
   controllers: [UsersController, UserAuth, UserForgotPassword, UserResetPassword, RankingController, SocialLogin, CheckPayment],
   providers: [UsersService],
