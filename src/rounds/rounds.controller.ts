@@ -12,6 +12,16 @@ import {
 import { Round } from './models/round.interface';
 import { RoundsService } from './rounds.service';
 
+@Controller('roundsLeftOne')
+export class RoundsBetController {
+  constructor(private readonly roundsService: RoundsService) {}
+
+  @Get(':id')
+  findAll(@Param('id') id: string) {
+    return this.roundsService.findAllBet(id);
+  }
+}
+
 @Controller('rounds')
 export class RoundsController {
   constructor(private readonly roundsService: RoundsService) {}
@@ -34,9 +44,9 @@ export class RoundsController {
     return this.roundsService.findOne(id);
   }
 
-  @Patch()
-  update(@Param('league') leagueId: number, @Body() updateRoundDto: Round) {
-    return this.roundsService.update(updateRoundDto);
+  @Patch(':league')
+  update(@Param('league') league: number, @Body() updateRoundDto: Round) {
+    return this.roundsService.update(league, updateRoundDto);
   }
 
   @Delete(':id')

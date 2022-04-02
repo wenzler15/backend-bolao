@@ -62,10 +62,8 @@ export class RoundsService {
 
   async findAll() {
     let firstDate = moment(new Date()),
-      // secondDate = new Date('2022-04-01 20:00:00.000'),
       currentDate = moment().format('dddd'),
       difference = 0;
-    // timeDifference = moment.duration(firstDate.diff(secondDate));
 
     switch (currentDate) {
       case 'Sunday':
@@ -112,15 +110,26 @@ export class RoundsService {
     return response;
   }
 
+  async findAllBet(id: string) {
+    const rounds = await this.roundRepository.find({
+      where: {
+        round: id
+      },
+      order: {
+        round: 'ASC',
+        dateRound: 'ASC',
+      },
+    });
+
+    return rounds;
+  }
+
   findOne(id: string) {
     return this.roundRepository.findByIds([id]);
   }
 
-  async update(updateRoundDto: Round) {
+  async update(leagueId: number, updateRoundDto: Round) {
     const token = process.env.TOKEN_API;
-
-    //Id referente ao Brasileirão
-    const leagueId = 2013;
 
     try {
       const response = await axios.get(

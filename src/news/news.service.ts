@@ -14,7 +14,7 @@ export class NewsService {
     private readonly newsRepository: Repository<NewsEntity>,
   ) {}
 
-  @Cron('0 */12 * * *')
+  @Cron('0 1 * * * *')
   async handleCron() {
     let rss = await parse("https://www.gazetaesportiva.com/times/feed/");
   

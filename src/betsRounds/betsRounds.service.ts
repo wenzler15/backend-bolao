@@ -50,7 +50,7 @@ export class BetsRoundsService {
 
     const round = await this.roundRepository.findOne({ matchId: matchId });
 
-    if (moment().utc() < round.dateRoundLocked) {
+    if (moment().utc() > round.dateRoundLocked) {
       return { message: 'Bet round locked' };
     } else {
       const response = await this.betRoundRepository.save(betRound);
@@ -166,7 +166,7 @@ export class BetsRoundsService {
   async update(id: string, updateBetroundDto: BetRound) {
     const data = await this.betRoundRepository.findOne({ where: { id } });
 
-    if (!data) return { message: 'Bet left one not found' };
+    if (!data) return { message: 'Bet round not found' };
 
     const response = await this.betRoundRepository.save({
       ...data,

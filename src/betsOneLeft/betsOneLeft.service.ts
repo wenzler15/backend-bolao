@@ -67,7 +67,7 @@ export class BetsOneLeftService {
           'Bet already placed on this team, please bet on another team to win',
       };
 
-    if (moment().utc() < round.dateRoundLocked) {
+    if (moment().utc() > round.dateRoundLocked) {
       return { message: 'Bet round locked' };
     } else {
       if (!lastBet && rounds[0].round >= 7) {
