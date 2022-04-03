@@ -111,7 +111,11 @@ export class UsersService {
 
     user.password = undefined;
 
-    return {message: "User Logged", token: this.generateToken({id: user.id})};
+    return {
+      message: "User Logged", 
+      token: this.generateToken({id: user.id}),
+      user: user
+    };
   }
 
   async forgotPassword(email: string) {
@@ -175,12 +179,18 @@ export class UsersService {
     const user = await this.userRepository.findOne({ where: {email}});
     if(body.facebook_token) {
       if(body.facebook_token === user.facebookToken) {
-        return {message: "Correct token!"}
+        return {
+          message: "Correct token!",
+          user: user
+        }
       }
       return {message: "Incorrect token!"}
     } else {
       if(body.google_token === user.googleToken) {
-        return {message: "Correct token!"}
+        return {
+          message: "Correct token!",
+          user: user
+        }
       }
       return {message: "Incorrect token!"}
     } 

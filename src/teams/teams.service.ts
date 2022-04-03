@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { TeamEntity } from './models/team.entity';
 import { Team } from './models/team.interface';
 const axios = require('axios');
@@ -51,12 +51,23 @@ export class TeamsService {
     }
   }
 
-  findAll() {
-    return this.teamRepository.find({
-      order: {
-        teamName: 'ASC',
-      },
-    });
+  async findAll(teamName: string) {
+    if (teamName === '') {
+      return this.teamRepository.find({
+        order: {
+          teamName: 'ASC',
+        },
+      });
+    } else {
+      return this.teamRepository.find({
+        where: {
+          teamName: Like(`%${teamName}%`),
+        },
+        order: {
+          teamName: 'ASC',
+        },
+      });
+    }
   }
 
   findOne(id: string) {

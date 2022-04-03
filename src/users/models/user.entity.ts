@@ -8,7 +8,7 @@ export class UserEntity {
   @Column({ default: '' })
   email: string;
 
-  @Column({ type: 'integer' ,default: 0})
+  @Column({ type: 'integer', default: 0 })
   position: number;
 
   @Column({ default: '' })
@@ -17,7 +17,7 @@ export class UserEntity {
   @Column({ default: '' })
   password: string;
 
-  @Column({ default: ''})
+  @Column({ default: '' })
   lastName: string;
 
   @Column({ default: '' })
@@ -44,7 +44,7 @@ export class UserEntity {
   @Column({ type: 'integer', default: 0 })
   points: number;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
   @Column({ default: '' })
@@ -54,10 +54,10 @@ export class UserEntity {
   agencyNumber: string;
 
   @Column({ default: '' })
-  acountNumber: string;
+  accountNumber: string;
 
   @Column({ default: '' })
-  acountType: string;
+  accountType: string;
 
   @Column({ type: 'integer', default: 0 })
   favoriteTeam: number;
@@ -77,8 +77,6 @@ export class UserEntity {
   @Column({ type: 'timestamp', nullable: true })
   passwordResetExpires: Date;
 
-  @Column({default: '', nullable: true})
+  @Column({ default: '', nullable: true })
   googleToken: string;
 }
-
-

@@ -8,6 +8,7 @@ import {
   Patch,
   Param,
   Delete,
+  Headers,
 } from '@nestjs/common';
 import { Team } from './models/team.interface';
 import { TeamsService } from './teams.service';
@@ -25,8 +26,8 @@ export class TeamsController {
   }
 
   @Get()
-  findAll() {
-    return this.teamsService.findAll();
+  findAll(@Headers('teamName') teamName: string) {
+    return this.teamsService.findAll(teamName);
   }
 
   @Get(':id')
