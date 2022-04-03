@@ -113,7 +113,7 @@ export class RoundsService {
   async findAllBet(id: string) {
     const rounds = await this.roundRepository.find({
       where: {
-        round: id
+        round: id,
       },
       order: {
         round: 'ASC',

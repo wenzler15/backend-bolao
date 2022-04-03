@@ -63,20 +63,43 @@ export class TeamsService {
     return this.teamRepository.findByIds([id]);
   }
 
-  update(id: string, updateRoundDto: string) {
-    // return this.roundModel
-    //   .findByIdAndUpdate(
-    //     {
-    //       _id: id,
-    //     },
-    //     {
-    //       $set: updateRoundDto,
-    //     },
-    //     {
-    //       new: true,
-    //     },
-    //   )
-    //   .exec();
+  async update(leagueId: number, updateTeamDto: Team) {
+    const token = process.env.TOKEN_API;
+
+    try {
+      const response = await axios.get(
+        `https://api.football-data.org/v2/competitions/${leagueId}/teams`,
+        {
+          headers: {
+            'X-Auth-Token': token,
+          },
+        },
+      );
+      response.data.teams.forEach(async (element) => {
+        const dataDB = await this.teamRepository.findOne({
+          where: { teamId: element.id },
+        });
+
+        if (!dataDB) {
+          return { message: 'Team not found' };
+        } else {
+          const data = {
+            leagueId: response.data.competition.id,
+            teamId: element.id,
+            teamName: element.name,
+            teamEmblemUrl: element.crestUrl ? element.crestUrl : null,
+          };
+
+          const responseDB = await this.teamRepository.save({
+            ...dataDB,
+            ...data,
+          });
+        }
+      });
+      return { message: 'Teams updated' };
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   remove(id: string) {
