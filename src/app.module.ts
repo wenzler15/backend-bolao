@@ -12,6 +12,7 @@ import { NewsModule } from './news/news.module';
 import { PaymentModule } from './payment/payment.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { ScheduleModule } from "@nestjs/schedule";
+import { PremiumModule } from './premium/premium.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { ScheduleModule } from "@nestjs/schedule";
     NewsModule,
     PaymentModule,
     NotificationsModule,
+    PremiumModule,
   ],
   controllers: [],
   providers: [],

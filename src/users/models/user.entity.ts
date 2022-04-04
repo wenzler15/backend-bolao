@@ -51,6 +51,9 @@ export class UserEntity {
   bankName: string;
 
   @Column({ default: '' })
+  profileUrl: string;
+
+  @Column({ default: '' })
   agencyNumber: string;
 
   @Column({ default: '' })

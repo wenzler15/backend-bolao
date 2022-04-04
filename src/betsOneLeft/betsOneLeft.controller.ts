@@ -13,6 +13,16 @@ import { BetOneLeft } from './models/betOneLeft.interface';
 import { BetsOneLeftService } from './betsOneLeft.service';
 import { AdminAproveEntity } from './models/adminAprove.entity';
 
+@Controller('userBetLeftOne')
+export class UserBetLeftOneController{
+  constructor(private readonly betsOneLeftService: BetsOneLeftService) {}
+
+  @Get(':id')
+  getBet(@Param('id') id: string) {
+    return this.betsOneLeftService.getBet(id);
+  }
+}
+
 @Controller('betsOneLeft/admin')
 export class BetsRoundsAdminController {
   constructor(private readonly betsOneLeftService: BetsOneLeftService) {}

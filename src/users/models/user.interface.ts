@@ -24,6 +24,7 @@ export interface User {
     googleToken?: string;
     winsNumberLeftOne?: number;
     winsNumber?: number;
+    profileUrl?: string;
     passwordResetToken?: string;
     passwordResetExpires?: Date;
 }

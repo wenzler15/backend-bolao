@@ -7,6 +7,7 @@ import { match } from 'assert';
 import { BetOneLeftEntity } from 'src/betsOneLeft/models/betOnelLeft.entity';
 import { BetRoundEntity } from 'src/betsRounds/models/betRounds.entity';
 import { PaymentEntity } from 'src/payment/models/payment.entity';
+import { PremiumEntity } from 'src/premium/models/premium.entity';
 import { RoundEntity } from 'src/rounds/models/round.entity';
 import { Repository } from 'typeorm';
 import { AuthEntity } from './models/auth.entity';
@@ -26,6 +27,8 @@ export class UsersService {
     private readonly paymentRepository: Repository<PaymentEntity>,
     @InjectRepository(BetOneLeftEntity)
     private readonly betOneLeftRepository: Repository<BetOneLeftEntity>,
+    @InjectRepository(PremiumEntity)
+    private readonly premiumRepository: Repository<PremiumEntity>,
     @InjectRepository(RoundEntity)
     private readonly roundRepository: Repository<RoundEntity>,
     private readonly sendGird: SendGridService) {}
@@ -196,10 +199,24 @@ export class UsersService {
     } 
   }
 
-  async getRanking(id: number, league: number) {
+  async getRanking(id: number, league: number, round: number) {
     let response = [];
 
-    if (!league) {
+    if (round) {
+      const premium = await this.premiumRepository.findOne({
+        where: {
+          leagueId: league,
+          round,
+          gameMode: 'semanal'
+        }
+      });
+
+      const premiums = {
+        firstPlacePremium: premium.firstPlacePremium,
+        secondPlacePremium: premium.secondPlacePremium,
+        thirdPlacePremium: premium.thirdPlacePremium
+      }      
+
       response = await this.userRepository.find({
         select: ["name", "favoriteTeam", "points", "id"],
         order: {
@@ -219,11 +236,25 @@ export class UsersService {
 
     const respUser = {
       userRanking, 
-      generalRanking: response
+      generalRanking: response,
+      premium: premiums
     }
 
     return respUser;
     } else {
+      const premium = await this.premiumRepository.findOne({
+        where: {
+          leagueId: league,
+          gameMode: 'resta 1'
+        }
+      });
+
+      const premiums = {
+        firstPlacePremium: premium.firstPlacePremium,
+        secondPlacePremium: premium.secondPlacePremium,
+        thirdPlacePremium: premium.thirdPlacePremium
+      }  
+
       response = await this.betOneLeftRepository
       .createQueryBuilder("betLeftOne")
       .innerJoinAndSelect("user", "user", 'user.id = betLeftOne.userId')
@@ -250,7 +281,8 @@ export class UsersService {
   
       const respUser = {
         userRanking, 
-        generalRanking: generalRanking
+        generalRanking: generalRanking,
+        premium: premiums
       }
   
       return respUser;

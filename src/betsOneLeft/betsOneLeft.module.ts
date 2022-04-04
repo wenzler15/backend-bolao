@@ -3,6 +3,7 @@ import { BetsOneLeftService } from './betsOneLeft.service';
 import {
   BetsOneLeftController,
   BetsRoundsAdminController,
+  UserBetLeftOneController,
   WinningBetController,
 } from './betsOneLeft.controller';
 import { BetOneLeftEntity } from './models/betOnelLeft.entity';
@@ -18,6 +19,7 @@ import { NotificationEntity } from 'src/notifications/models/notifications.entit
     BetsOneLeftController,
     BetsRoundsAdminController,
     WinningBetController,
+    UserBetLeftOneController
   ],
   providers: [BetsOneLeftService],
 })

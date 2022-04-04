@@ -25,12 +25,13 @@ export class NewsService {
 
       const data = {
         title: item.title,
-        url: item.link
+        url: item.link,
+        description: item.description,
+        coverUrl: item.content
       };
 
       await this.newsRepository.save(data);
     });
-    console.log("salvo");
   }
 
   async create(news: News) {

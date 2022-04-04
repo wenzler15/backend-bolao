@@ -8,6 +8,7 @@ import {
   Patch,
   Param,
   Delete,
+  Headers,
 } from '@nestjs/common';
 import { Round } from './models/round.interface';
 import { RoundsService } from './rounds.service';
@@ -17,8 +18,8 @@ export class RoundsBetController {
   constructor(private readonly roundsService: RoundsService) {}
 
   @Get(':id')
-  findAll(@Param('id') id: string) {
-    return this.roundsService.findAllBet(id);
+  findAll(@Param('id') id: string, @Headers('leagueId') leagueId: string, @Headers('userId') userId: string) {
+    return this.roundsService.findAllBet(id, leagueId, userId);
   }
 }
 
@@ -35,8 +36,8 @@ export class RoundsController {
   }
 
   @Get()
-  findAll() {
-    return this.roundsService.findAll();
+  findAll(@Headers('dateGame') gameDate: string, @Headers('leagueId') leagueId: string) {
+    return this.roundsService.findAll(gameDate, leagueId);
   }
 
   @Get(':id')

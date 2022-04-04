@@ -61,8 +61,8 @@ export class RankingController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  raking(@Query('id') id: number, @Query('league') league: number) {
-    return this.usersService.getRanking(id, league);
+  raking(@Query('id') id: number, @Query('league') league: number,  @Query('round') round: number) {
+    return this.usersService.getRanking(id, league, round);
   }
 } 
 

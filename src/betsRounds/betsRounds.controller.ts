@@ -14,6 +14,16 @@ import { BetRound } from './models/betRounds.interface';
 import { BetsRoundsService } from './betsRounds.service';
 import { AdminAproveEntity } from './models/adminAprove.entity';
 
+@Controller('userBet')
+export class UserBetController{
+  constructor(private readonly betsRoundService: BetsRoundsService) {}
+
+  @Get(':id')
+  getBet(@Param('id') id: string) {
+    return this.betsRoundService.getBet(id);
+  }
+}
+
 @Controller('betsRound/admin')
 export class BetsRoundsAdminController {
   constructor(private readonly betsRoundService: BetsRoundsService) {}

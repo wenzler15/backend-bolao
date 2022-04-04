@@ -67,10 +67,13 @@ export class BetsOneLeftService {
           'Bet already placed on this team, please bet on another team to win',
       };
 
+      betOneLeft.round = rounds[0].round;
+
     if (moment().utc() > round.dateRoundLocked) {
       return { message: 'Bet round locked' };
     } else {
       if (!lastBet && rounds[0].round >= 7) {
+
         betOneLeft.life = 2;
         const response = await this.betOneLeftRepository.save(betOneLeft);
 
@@ -187,5 +190,17 @@ export class BetsOneLeftService {
     });
 
     return response;
+  }
+
+  async getBet(id: string) { 
+     const response = await this.betOneLeftRepository
+      .createQueryBuilder("betOneLeft")
+      .innerJoinAndSelect("team", "team", "team.teamId = betOneLeft.winnerTeamId")
+      .select(["team.teamName, betOneLeft.matchId, betOneLeft.life"])
+      .orderBy("betOneLeft.id", "DESC")
+      .where(`betOneLeft.userId = ${id}`)
+      .getRawOne();
+
+    return {message: "Last leftOne user bet!", response: response}
   }
 }

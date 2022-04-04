@@ -4,6 +4,7 @@ import {
   BetsRoundsController,
   BetsRoundsAdminController,
   WinningBetController,
+  UserBetController,
 } from './betsRounds.controller';
 import { BetRoundEntity } from './models/betRounds.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -19,6 +20,7 @@ import { NotificationEntity } from 'src/notifications/models/notifications.entit
     BetsRoundsController,
     BetsRoundsAdminController,
     WinningBetController,
+    UserBetController
   ],
   providers: [BetsRoundsService],
 })

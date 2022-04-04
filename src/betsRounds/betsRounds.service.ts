@@ -190,4 +190,20 @@ export class BetsRoundsService {
 
     return response;
   }
+
+  async getBet(id: string) {
+    console.log(id);
+    
+    const response = await this.betRoundRepository
+      .createQueryBuilder("betRound")
+      .innerJoinAndSelect("team", "team", "team.teamId = betRound.winnerTeam")
+      .innerJoinAndSelect("round", "round", "round.matchId = betRound.matchId")
+      .innerJoinAndSelect("team", "team2", "team2.teamId = round.homeTeamId")
+      .innerJoinAndSelect("team", "team3", "team3.teamId = round.awayTeamId")
+      .select(["team.teamName, betRound.matchId, betRound.homeTeamScore, betRound.awayTeamScore, team2.teamName as TimeDaCasa, team3.teamName as TimeVisitante"])
+      .orderBy("betRound.id", "DESC")
+      .where(`betRound.userId = ${id}`)
+      .getRawOne();
+    return {message: "Last leftOne user bet!", response: response}
+  }
 }

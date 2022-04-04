@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { BetOneLeftEntity } from 'src/betsOneLeft/models/betOnelLeft.entity';
 import { Repository } from 'typeorm';
 import { RoundEntity } from './models/round.entity';
 import { Round } from './models/round.interface';
@@ -11,6 +12,8 @@ export class RoundsService {
   constructor(
     @InjectRepository(RoundEntity)
     private readonly roundRepository: Repository<RoundEntity>,
+    @InjectRepository(BetOneLeftEntity)
+    private readonly betLeftOneRepository: Repository<BetOneLeftEntity>,
   ) {}
 
   async create(league: number, round: Round) {
@@ -60,9 +63,14 @@ export class RoundsService {
     return { message: 'Data of the rounds inserted in the tables' };
   }
 
-  async findAll() {
-    let firstDate = moment(new Date()),
-      currentDate = moment().format('dddd'),
+  async findAll(gameDate: string, leagueId: string) {
+    let firstDate = moment(new Date())
+    if(gameDate) {
+      const newDate = gameDate.split("/")[2] + gameDate.split("/")[1] + gameDate.split("/")[0];
+      firstDate = moment(newDate);
+    }
+
+     let  currentDate = moment().format('dddd'),
       difference = 0;
 
     switch (currentDate) {
@@ -89,12 +97,14 @@ export class RoundsService {
         break;
     }
 
-    const rounds = await this.roundRepository.find({
-      order: {
-        round: 'ASC',
-        dateRound: 'ASC',
-      },
-    });
+    const rounds = await this.roundRepository
+    .createQueryBuilder("round")
+    .innerJoinAndSelect("team", "homeTeam", "homeTeam.teamId = round.homeTeamId")
+    .innerJoinAndSelect("team", "awayTeam", "awayTeam.teamId = round.awayTeamId")
+    .select(["round.*, awayTeam.teamEmblemUrl as awayTeamEmblemUrl, awayTeam.teamName as awayTeamName, homeTeam.teamEmblemUrl as homeTeamEmblemUrl, homeTeam.teamName as homeTeamName"])
+    .orderBy("round.dateRound", "ASC")
+    .where(`round.leagueId = ${leagueId}`)
+    .getRawMany();
 
     const response = [];
 
@@ -102,23 +112,32 @@ export class RoundsService {
       const secondDate = item.dateRound;
       const timeDifference = moment.duration(firstDate.diff(secondDate));
 
-      if (Math.abs(Math.floor(timeDifference.asDays())) <= difference) {
-        response.push(item);
+      if (Math.floor(timeDifference.asDays()) < 0) {
+        if (Math.abs(Math.floor(timeDifference.asDays())) <= difference) {
+          response.push(item);
+        }
       }
     });
 
     return response;
   }
 
-  async findAllBet(id: string) {
-    const rounds = await this.roundRepository.find({
-      where: {
-        round: id,
-      },
-      order: {
-        round: 'ASC',
-        dateRound: 'ASC',
-      },
+  async findAllBet(id: string, leagueId: string, userId: string) {
+
+    const bet = await this.betLeftOneRepository.findOne({ where: { round: id, userId: userId }});
+
+    const rounds = await this.roundRepository
+    .createQueryBuilder("round")
+    .innerJoinAndSelect("team", "homeTeam", "homeTeam.teamId = round.homeTeamId")
+    .innerJoinAndSelect("team", "awayTeam", "awayTeam.teamId = round.awayTeamId")
+    .select(["round.*, awayTeam.teamEmblemUrl as awayTeamEmblemUrl, awayTeam.teamName as awayTeamName, homeTeam.teamEmblemUrl as homeTeamEmblemUrl, homeTeam.teamName as homeTeamName"])
+    .where(`round.round = ${id} and round.leagueId = ${leagueId}`)
+    .orderBy("round.dateRound", "ASC")
+    .getRawMany();
+
+    rounds.forEach((item) => {      
+      item.homeTeamSelected = item.homeTeamId == bet.winnerTeamId ? true : false;
+      item.awayTeamSelected = item.awayTeamId == bet.winnerTeamId ? true : false;
     });
 
     return rounds;
