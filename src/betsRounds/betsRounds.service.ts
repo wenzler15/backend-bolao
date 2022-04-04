@@ -22,7 +22,7 @@ export class BetsRoundsService {
     @InjectRepository(PaymentEntity)
     private readonly paymentRepository: Repository<PaymentEntity>,
     @InjectRepository(NotificationEntity)
-    private readonly notificationRepository: Repository<NotificationEntity>
+    private readonly notificationRepository: Repository<NotificationEntity>,
   ) {}
 
   async create(betRound: BetRound) {
@@ -72,18 +72,17 @@ export class BetsRoundsService {
 
     const bet = await this.betRoundRepository.findOne({ where: { id } });
 
-    
     if (bet.status) return { message: 'This bet has already been updated!' };
-    
+
     const user = await this.userRepository.findOne({ id: bet.userId });
 
     const notification = {
       userId: bet.userId,
       read: 0,
-      message: "Jogo finalizado!",
-      gameMode: "Semanal"
-    }
-    
+      message: 'Jogo finalizado!',
+      gameMode: 'Semanal',
+    };
+
     await this.notificationRepository.save(notification);
 
     const round = await this.roundRepository.findOne({ matchId: bet.matchId });
@@ -104,7 +103,7 @@ export class BetsRoundsService {
       bet.homeTeamScore === round.homeTeamScore &&
       winner != 0
     ) {
-      if(round.awayTeamId === user.favoriteTeam) {
+      if (round.awayTeamId === user.favoriteTeam) {
         points += 100;
       } else {
         points += 80;
@@ -114,20 +113,20 @@ export class BetsRoundsService {
       const notificationWinner = {
         userId: bet.userId,
         read: 0,
-        message: "Parabéns, você acertou o placar do jogo!"
-      }
+        message: 'Parabéns, você acertou o placar do jogo!',
+      };
 
       await this.notificationRepository.save(notificationWinner);
     } else if (bet.winnerTeam === 0 && winner === 0) {
       points += 40;
     } else if (bet.winnerTeam == winner) {
       points += 60;
-      
+
       const notificationWinner = {
         userId: bet.userId,
         read: 0,
-        message: "Você acertou o vencedor!"
-      }
+        message: 'Você acertou o vencedor!',
+      };
 
       await this.notificationRepository.save(notificationWinner);
     }
@@ -192,18 +191,18 @@ export class BetsRoundsService {
   }
 
   async getBet(id: string) {
-    console.log(id);
-    
     const response = await this.betRoundRepository
-      .createQueryBuilder("betRound")
-      .innerJoinAndSelect("team", "team", "team.teamId = betRound.winnerTeam")
-      .innerJoinAndSelect("round", "round", "round.matchId = betRound.matchId")
-      .innerJoinAndSelect("team", "team2", "team2.teamId = round.homeTeamId")
-      .innerJoinAndSelect("team", "team3", "team3.teamId = round.awayTeamId")
-      .select(["team.teamName, betRound.matchId, betRound.homeTeamScore, betRound.awayTeamScore, team2.teamName as TimeDaCasa, team3.teamName as TimeVisitante"])
-      .orderBy("betRound.id", "DESC")
+      .createQueryBuilder('betRound')
+      .innerJoinAndSelect('team', 'team', 'team.teamId = betRound.winnerTeam')
+      .innerJoinAndSelect('round', 'round', 'round.matchId = betRound.matchId')
+      .innerJoinAndSelect('team', 'team2', 'team2.teamId = round.homeTeamId')
+      .innerJoinAndSelect('team', 'team3', 'team3.teamId = round.awayTeamId')
+      .select([
+        'team.teamName, betRound.matchId, betRound.homeTeamScore, betRound.awayTeamScore, team2.teamName AS "TimeDaCasa", team3.teamName AS "TimeVisitante"',
+      ])
+      .orderBy('betRound.id', 'DESC')
       .where(`betRound.userId = ${id}`)
       .getRawOne();
-    return {message: "Last leftOne user bet!", response: response}
+    return { message: 'Last leftOne user bet!', response: response };
   }
 }

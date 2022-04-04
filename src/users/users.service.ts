@@ -3,7 +3,6 @@
 import { SendGridService } from '@anchan828/nest-sendgrid';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { match } from 'assert';
 import { BetOneLeftEntity } from 'src/betsOneLeft/models/betOnelLeft.entity';
 import { BetRoundEntity } from 'src/betsRounds/models/betRounds.entity';
 import { PaymentEntity } from 'src/payment/models/payment.entity';
@@ -27,6 +26,8 @@ export class UsersService {
     private readonly paymentRepository: Repository<PaymentEntity>,
     @InjectRepository(BetOneLeftEntity)
     private readonly betOneLeftRepository: Repository<BetOneLeftEntity>,
+    @InjectRepository(BetRoundEntity)
+    private readonly betRoundRepository: Repository<BetOneLeftEntity>,
     @InjectRepository(PremiumEntity)
     private readonly premiumRepository: Repository<PremiumEntity>,
     @InjectRepository(RoundEntity)
@@ -197,6 +198,34 @@ export class UsersService {
       }
       return {message: "Incorrect token!"}
     } 
+  }
+
+  async historyBets(id: string) {
+    const betsLeftOne = await this.betOneLeftRepository.find({ 
+      where: { userId: id },
+      order: {
+        createdAt: 'DESC'
+      }
+    });
+    const betsRound = await this.betRoundRepository.find({ 
+      where: { userId: id },
+      order: {
+        createdAt: 'DESC'
+      }
+    });
+    const user = await this.userRepository.find({ 
+      where: { id: id },
+    })
+
+    user[0].password = undefined;
+    user[0].passwordResetExpires = undefined;
+    user[0].passwordResetToken = undefined;
+
+    return {
+      user: user,
+      betsLeftOne: betsLeftOne,
+      betsRound: betsRound
+    };
   }
 
   async getRanking(id: number, league: number, round: number) {

@@ -97,6 +97,11 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
+  @Get('historyBets/:id')
+  historyBets(@Param('id') id: string) {
+    return this.usersService.historyBets(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: User) {
     return this.usersService.update(id, updateUserDto);
