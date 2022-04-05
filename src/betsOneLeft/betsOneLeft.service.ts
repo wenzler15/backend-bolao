@@ -30,6 +30,8 @@ export class BetsOneLeftService {
 
     const rounds = await this.roundsRepository.find({ matchId });
 
+    betOneLeft.leagueId = rounds[0].leagueId;
+
     const payment = await this.paymentRepository.find({
       where: {
         leagueId: rounds[0].leagueId,
@@ -41,11 +43,18 @@ export class BetsOneLeftService {
     // if (payment[0].status === 'aprovado' && payment[0].gameMode === 2 || payment[0].gameMode === 3) {
     const betLeftOneExists = await this.betOneLeftRepository.findOne({
       userId,
-      matchId,
+      round: betOneLeft.round,
+      leagueId: betOneLeft.leagueId
     });
 
-    if (betLeftOneExists)
-      return { message: 'This user has already betted in this match!' };
+    if (betLeftOneExists) {
+      const response = await this.betOneLeftRepository.save({
+        ...betLeftOneExists,
+        ...betOneLeft,
+      });
+
+      return {message: "Aposta atualizada com sucesso", bet: response}
+    }      
 
     const lastBet = await this.betOneLeftRepository.findOne({
       where: { userId },
@@ -69,7 +78,7 @@ export class BetsOneLeftService {
 
       betOneLeft.round = rounds[0].round;
 
-    if (moment().utc() > round.dateRoundLocked) {
+    if (moment().utc() < round.dateRoundLocked) {
       return { message: 'Bet round locked' };
     } else {
       if (!lastBet && rounds[0].round >= 7) {
