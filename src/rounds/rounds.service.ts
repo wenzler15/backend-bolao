@@ -64,13 +64,16 @@ export class RoundsService {
   }
 
   async findAll(gameDate: string, leagueId: string) {
-    let firstDate = moment(new Date())
-    if(gameDate) {
-      const newDate = gameDate.split("/")[2] + gameDate.split("/")[1] + gameDate.split("/")[0];
+    let firstDate = moment(new Date());
+    if (gameDate) {
+      const newDate =
+        gameDate.split('/')[2] +
+        gameDate.split('/')[1] +
+        gameDate.split('/')[0];
       firstDate = moment(newDate);
     }
 
-     let  currentDate = moment().format('dddd'),
+    let currentDate = moment().format('dddd'),
       difference = 0;
 
     switch (currentDate) {
@@ -98,13 +101,23 @@ export class RoundsService {
     }
 
     const rounds = await this.roundRepository
-    .createQueryBuilder("round")
-    .innerJoinAndSelect("team", "homeTeam", "homeTeam.teamId = round.homeTeamId")
-    .innerJoinAndSelect("team", "awayTeam", "awayTeam.teamId = round.awayTeamId")
-    .select(["round.*, awayTeam.teamEmblemUrl as awayTeamEmblemUrl, awayTeam.teamName as awayTeamName, homeTeam.teamEmblemUrl as homeTeamEmblemUrl, homeTeam.teamName as homeTeamName"])
-    .orderBy("round.dateRound", "ASC")
-    .where(`round.leagueId = ${leagueId}`)
-    .getRawMany();
+      .createQueryBuilder('round')
+      .innerJoinAndSelect(
+        'team',
+        'homeTeam',
+        'homeTeam.teamId = round.homeTeamId',
+      )
+      .innerJoinAndSelect(
+        'team',
+        'awayTeam',
+        'awayTeam.teamId = round.awayTeamId',
+      )
+      .select([
+        'round.*, awayTeam.teamEmblemUrl AS "awayTeamEmblemUrl", awayTeam.teamName AS "awayTeamName", homeTeam."teamEmblemUrl" AS "homeTeamEmblemUrl", homeTeam.teamName AS "homeTeamName"',
+      ])
+      .orderBy('round.dateRound', 'ASC')
+      .where(`round.leagueId = ${leagueId}`)
+      .getRawMany();
 
     const response = [];
 
@@ -123,21 +136,34 @@ export class RoundsService {
   }
 
   async findAllBet(id: string, leagueId: string, userId: string) {
-
-    const bet = await this.betLeftOneRepository.findOne({ where: { round: id, userId: userId }});
+    const bet = await this.betLeftOneRepository.findOne({
+      where: { round: id, userId: userId },
+    });
 
     const rounds = await this.roundRepository
-    .createQueryBuilder("round")
-    .innerJoinAndSelect("team", "homeTeam", "homeTeam.teamId = round.homeTeamId")
-    .innerJoinAndSelect("team", "awayTeam", "awayTeam.teamId = round.awayTeamId")
-    .select(["round.*, awayTeam.teamEmblemUrl as awayTeamEmblemUrl, awayTeam.teamName as awayTeamName, homeTeam.teamEmblemUrl as homeTeamEmblemUrl, homeTeam.teamName as homeTeamName"])
-    .where(`round.round = ${id} and round.leagueId = ${leagueId}`)
-    .orderBy("round.dateRound", "ASC")
-    .getRawMany();
+      .createQueryBuilder('round')
+      .innerJoinAndSelect(
+        'team',
+        'homeTeam',
+        'homeTeam.teamId = round.homeTeamId',
+      )
+      .innerJoinAndSelect(
+        'team',
+        'awayTeam',
+        'awayTeam.teamId = round.awayTeamId',
+      )
+      .select([
+        'round.*, awayTeam.teamEmblemUrl AS "awayTeamEmblemUrl", awayTeam.teamName AS "awayTeamName", homeTeam.teamEmblemUrl AS "homeTeamEmblemUrl", homeTeam.teamName AS "homeTeamName"',
+      ])
+      .where(`round.round = ${id} and round.leagueId = ${leagueId}`)
+      .orderBy('round.dateRound', 'ASC')
+      .getRawMany();
 
-    rounds.forEach((item) => {      
-      item.homeTeamSelected = item.homeTeamId == bet.winnerTeamId ? true : false;
-      item.awayTeamSelected = item.awayTeamId == bet.winnerTeamId ? true : false;
+    rounds.forEach((item) => {
+      item.homeTeamSelected =
+        item.homeTeamId == bet.winnerTeamId ? true : false;
+      item.awayTeamSelected =
+        item.awayTeamId == bet.winnerTeamId ? true : false;
     });
 
     return rounds;
