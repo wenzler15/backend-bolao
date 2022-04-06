@@ -37,6 +37,11 @@ export class BetsRoundsAdminController {
 export class WinningBetController {
   constructor(private readonly betsOneLeftService: BetsOneLeftService) {}
 
+  @Get()
+  getAllWinningBet() {
+    return this.betsOneLeftService.getAllWinningBet();
+  }
+
   @Get(':id')
   winningBet(@Param('id') id: string) {
     return this.betsOneLeftService.getWinningBet(id);
