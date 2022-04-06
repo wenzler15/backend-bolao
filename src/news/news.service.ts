@@ -62,8 +62,11 @@ export class NewsService {
     rss.items.forEach( async (item) => {
       const toData = {        
         title: item.title,
-        link: item.link
+        link: item.link,
+        description: item.description,
+        coverUrl: item.content
       }
+
       data.push(toData)
     });
 

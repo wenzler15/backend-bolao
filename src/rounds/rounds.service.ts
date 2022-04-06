@@ -160,10 +160,12 @@ export class RoundsService {
       .getRawMany();
 
     rounds.forEach((item) => {
-      item.homeTeamSelected =
+      if(bet) {
+        item.homeTeamSelected =
         item.homeTeamId == bet.winnerTeamId ? true : false;
-      item.awayTeamSelected =
+        item.awayTeamSelected =
         item.awayTeamId == bet.winnerTeamId ? true : false;
+      }
     });
 
     return rounds;
