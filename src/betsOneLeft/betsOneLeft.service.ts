@@ -78,7 +78,7 @@ export class BetsOneLeftService {
 
       betOneLeft.round = rounds[0].round;
 
-    if (moment().utc() < round.dateRoundLocked) {
+    if (moment().utc() > round.dateRoundLocked) {
       return { message: 'Bet round locked' };
     } else {
       if (!lastBet && rounds[0].round >= 7) {

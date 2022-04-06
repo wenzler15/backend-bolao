@@ -204,7 +204,7 @@ export class UsersService {
   async historyBets(id: string) {
     const betsLeftOne = await this.betOneLeftRepository
     .createQueryBuilder('betOneLeft')
-    .innerJoinAndSelect('team', 'winnerTeam', 'winnerTeam.teamId = betOneLeft.winnerTeamId')
+    .leftJoinAndSelect('team', 'winnerTeam', 'winnerTeam.teamId = betOneLeft.winnerTeamId')
     .innerJoinAndSelect('round', 'round', 'round.matchId = betOneLeft.matchId')
     .innerJoinAndSelect(
       'team',

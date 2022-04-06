@@ -53,6 +53,12 @@ export class BetsRoundsService {
     if (moment().utc() > round.dateRoundLocked) {
       return { message: 'Bet round locked' };
     } else {
+      if(betRound.awayTeamScore > betRound.homeTeamScore) {
+        betRound.winnerTeam = round.awayTeamId
+      } else if(betRound.awayTeamScore < betRound.homeTeamScore) {
+        betRound.winnerTeam = round.homeTeamId
+      }
+
       const response = await this.betRoundRepository.save(betRound);
 
       return { message: 'Bet round created', betRound: response };
@@ -76,6 +82,10 @@ export class BetsRoundsService {
 
     const user = await this.userRepository.findOne({ id: bet.userId });
 
+    if(bet.awayTeamScore == bet.homeTeamScore) {
+      bet.winnerTeam = 0;
+    }
+    
     const notification = {
       userId: bet.userId,
       read: 0,
