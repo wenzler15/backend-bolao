@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable prettier/prettier */
 import { SendGridService } from '@anchan828/nest-sendgrid';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Res } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { response } from 'express';
 import { BetOneLeftEntity } from 'src/betsOneLeft/models/betOnelLeft.entity';
 import { BetRoundEntity } from 'src/betsRounds/models/betRounds.entity';
 import { PaymentEntity } from 'src/payment/models/payment.entity';
@@ -201,18 +202,44 @@ export class UsersService {
   }
 
   async historyBets(id: string) {
-    const betsLeftOne = await this.betOneLeftRepository.find({ 
-      where: { userId: id },
-      order: {
-        createdAt: 'DESC'
-      }
-    });
-    const betsRound = await this.betRoundRepository.find({ 
-      where: { userId: id },
-      order: {
-        createdAt: 'DESC'
-      }
-    });
+    const betsLeftOne = await this.betOneLeftRepository
+    .createQueryBuilder('betOneLeft')
+    .innerJoinAndSelect('team', 'winnerTeam', 'winnerTeam.teamId = betOneLeft.winnerTeamId')
+    .innerJoinAndSelect('round', 'round', 'round.matchId = betOneLeft.matchId')
+    .innerJoinAndSelect(
+      'team',
+      'homeTeam',
+      'homeTeam.teamId = round.homeTeamId',
+    )
+    .innerJoinAndSelect(
+      'team',
+      'awayTeam',
+      'awayTeam.teamId = round.awayTeamId',
+    )
+    .select(['betOneLeft.userId, betOneLeft.life, betOneLeft.matchId, betOneLeft.round, betOneLeft.leagueId, betOneLeft.status , awayTeam.teamEmblemUrl AS "awayTeamEmblemUrl", awayTeam.teamName AS "awayTeamName", homeTeam.teamEmblemUrl AS "homeTeamEmblemUrl", homeTeam.teamName AS "homeTeamName", winnerTeam.teamName as "winnerTeam"'])
+    .orderBy('betOneLeft.createdAt', 'DESC')
+    .where(`betOneLeft.userId = ${id}`)
+    .getRawMany();
+
+    const betsRound = await this.betRoundRepository
+    .createQueryBuilder('betRound')
+    .innerJoinAndSelect('team', 'winnerTeam', 'winnerTeam.teamId = betRound.winnerTeam')
+    .innerJoinAndSelect('round', 'round', 'round.matchId = betRound.matchId')
+    .innerJoinAndSelect(
+      'team',
+      'homeTeam',
+      'homeTeam.teamId = round.homeTeamId',
+    )
+    .innerJoinAndSelect(
+      'team',
+      'awayTeam',
+      'awayTeam.teamId = round.awayTeamId',
+    )
+    .select(['betRound.userId, betRound.matchId, betRound.round, betRound.homeTeamScore, betRound.awayTeamScore , awayTeam.teamEmblemUrl AS "awayTeamEmblemUrl", awayTeam.teamName AS "awayTeamName", homeTeam.teamEmblemUrl AS "homeTeamEmblemUrl", homeTeam.teamName AS "homeTeamName", winnerTeam.teamName as "winnerTeam"'])
+    .orderBy('betRound.createdAt', 'DESC')
+    .where(`betRound.userId = ${id}`)
+    .getRawMany();
+
     const user = await this.userRepository.find({ 
       where: { id: id },
     })

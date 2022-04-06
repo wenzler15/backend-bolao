@@ -113,7 +113,7 @@ export class RoundsService {
         'awayTeam.teamId = round.awayTeamId',
       )
       .select([
-        'round.*, awayTeam.teamEmblemUrl AS "awayTeamEmblemUrl", awayTeam.teamName AS "awayTeamName", homeTeam."teamEmblemUrl" AS "homeTeamEmblemUrl", homeTeam.teamName AS "homeTeamName"',
+        'round.*, awayTeam.teamEmblemUrl AS "awayTeamEmblemUrl", awayTeam.teamName AS "awayTeamName", homeTeam.teamEmblemUrl AS "homeTeamEmblemUrl", homeTeam.teamName AS "homeTeamName"',
       ])
       .orderBy('round.dateRound', 'ASC')
       .where(`round.leagueId = ${leagueId}`)
