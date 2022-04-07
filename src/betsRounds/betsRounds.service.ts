@@ -189,6 +189,35 @@ export class BetsRoundsService {
     return this.betRoundRepository.delete(id);
   }
 
+  async getAllWinningBet() {
+    const response = await this.betRoundRepository
+      .createQueryBuilder('betRound')
+      .innerJoinAndSelect('user', 'user', 'user.id = betRound.userId')
+      .innerJoinAndSelect('round', 'round', 'betRound.matchId = round.matchId')
+      .innerJoinAndSelect(
+        'team',
+        'teamHome',
+        'teamHome.teamId = round.homeTeamId',
+      )
+      .innerJoinAndSelect(
+        'team',
+        'teamAway',
+        'teamAway.teamId = round.awayTeamId',
+      )
+      .innerJoinAndSelect(
+        'team',
+        'teamWinner',
+        'teamWinner.teamId = betRound.winnerTeam',
+      )
+      .select([
+        'betRound.userId, user.name, user.lastName, betRound.id, teamHome.teamName AS "TimeDaCasa", teamAway.teamName AS "TimeVisitante", teamWinner.teamName AS "TimeVencedor"',
+      ])
+      .where('betRound.status = true')
+      .orderBy('betRound.createdAt', 'ASC')
+      .getRawMany();
+    return response;
+  }
+
   async getWinningBet(id: string) {
     const response = await this.betRoundRepository.find({
       where: { userId: id, status: true },
