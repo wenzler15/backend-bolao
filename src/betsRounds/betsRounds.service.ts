@@ -165,7 +165,18 @@ export class BetsRoundsService {
   }
 
   async findAll() {
-    return this.betRoundRepository.find();
+    const response = await this.betRoundRepository
+    .createQueryBuilder("betRound")
+    .innerJoinAndSelect("team", "winnerTeam", "winnerTeam.teamId = betRound.winnerTeam")
+    .innerJoinAndSelect("round", "round", "round.matchId = betRound.matchId")
+    .innerJoinAndSelect("team", "awayTeam", "awayTeam.teamId = round.awayTeamId")
+    .innerJoinAndSelect("team", "homeTeam", "homeTeam.teamId = round.homeTeamId")
+    .innerJoinAndSelect("league", "league", "league.leagueId = round.leagueId")
+    .select(['betRound.userId, betRound.round, betRound.id, league.leagueName as "leagueName", homeTeam.teamName as "homeTeam", awayTeam.teamName as "awayTeam", winnerTeam.teamName as "winningTeam"'])
+    .where("betRound.status = false")
+    .getRawMany();
+
+    return response;
   }
 
   findOne(id: string) {

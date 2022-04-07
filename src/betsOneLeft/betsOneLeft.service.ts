@@ -166,8 +166,19 @@ export class BetsOneLeftService {
     return { message: 'Bet updated!' };
   }
 
-  findAll() {
-    return this.betOneLeftRepository.find();
+  async findAll() {
+    const response = await this.betOneLeftRepository
+    .createQueryBuilder("betOneLeft")
+    .innerJoinAndSelect("team", "winnerTeam", "winnerTeam.teamId = betOneLeft.winnerTeamId")
+    .innerJoinAndSelect("round", "round", "round.matchId = betOneLeft.matchId")
+    .innerJoinAndSelect("team", "awayTeam", "awayTeam.teamId = round.awayTeamId")
+    .innerJoinAndSelect("team", "homeTeam", "homeTeam.teamId = round.homeTeamId")
+    .innerJoinAndSelect("league", "league", "league.leagueId = betOneLeft.leagueId")
+    .select(['betOneLeft.userId, betOneLeft.round, betOneLeft.id, betOneLeft.life, league.leagueName as "leagueName", homeTeam.teamName as "homeTeam", awayTeam.teamName as "awayTeam", winnerTeam.teamName as "winningTeam"'])
+    .where("betOneLeft.status = false")
+    .getRawMany();
+
+    return response;
   }
 
   findOne(id: string) {
