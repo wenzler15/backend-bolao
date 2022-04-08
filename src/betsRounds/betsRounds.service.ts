@@ -75,6 +75,7 @@ export class BetsRoundsService {
   async adminAprove(body: AdminAproveEntity) {
     const { id } = body;
     let winner = 0;
+    console.log("oi");
 
     const bet = await this.betRoundRepository.findOne({ where: { id } });
 

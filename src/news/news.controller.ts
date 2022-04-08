@@ -14,6 +14,17 @@ import { Repository } from 'typeorm';
 import { NewsEntity } from './models/news.entity';
 import { News } from './models/news.interface';
 import { NewsService } from './news.service';
+
+@Controller('newsId')
+export class NewsC {
+  constructor(private readonly newsService: NewsService) {}
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.newsService.findOneById(id);
+  }
+}
+
 @Controller('news')
 export class NewsController {
   constructor(private readonly newsService: NewsService) {}

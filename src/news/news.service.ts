@@ -73,6 +73,12 @@ export class NewsService {
     return data;
   }
 
+  async findOneById(id: string) {
+    const data = await this.newsRepository.findOne({ where: {id} });
+
+    return data;
+  };
+
   async update(id: string, updateNewsDto: News) {
     const data = await this.newsRepository.findOne({ where: { id } });
 

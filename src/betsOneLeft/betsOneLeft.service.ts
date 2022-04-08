@@ -105,11 +105,12 @@ export class BetsOneLeftService {
   async adminAprove(body: AdminAproveEntity) {
     const { id } = body;
     let winner = 0;
+    
     const bet = await this.betOneLeftRepository.findOne({ id });
 
     if (!bet) return { message: 'Bet not found!' };
 
-    if (bet.status) return { message: 'Bet has already been updated!' };
+    if (bet.status === true) return { message: 'Bet has already been updated!' };
 
     const round = await this.roundsRepository.findOne({ matchId: bet.matchId });
     const betAtt = bet;
