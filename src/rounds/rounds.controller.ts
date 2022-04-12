@@ -36,8 +36,8 @@ export class RoundsController {
   }
 
   @Get()
-  findAll(@Headers('dateGame') gameDate: string, @Headers('leagueId') leagueId: string) {
-    return this.roundsService.findAll(gameDate, leagueId);
+  findAll(@Headers('dateGame') gameDate: string, @Headers('leagueId') leagueId: string, @Headers('userId') userId: string) {
+   return this.roundsService.findAll(gameDate, leagueId, userId);
   }
 
   @Get(':id')

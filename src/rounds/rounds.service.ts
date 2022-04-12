@@ -2,6 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BetOneLeftEntity } from 'src/betsOneLeft/models/betOnelLeft.entity';
+import { BetRoundEntity } from 'src/betsRounds/models/betRounds.entity';
 import { Repository } from 'typeorm';
 import { RoundEntity } from './models/round.entity';
 import { Round } from './models/round.interface';
@@ -14,6 +15,8 @@ export class RoundsService {
     private readonly roundRepository: Repository<RoundEntity>,
     @InjectRepository(BetOneLeftEntity)
     private readonly betLeftOneRepository: Repository<BetOneLeftEntity>,
+    @InjectRepository(BetRoundEntity)
+    private readonly betRoundRepository: Repository<BetRoundEntity>,
   ) {}
 
   async create(league: number, round: Round) {
@@ -63,7 +66,7 @@ export class RoundsService {
     return { message: 'Data of the rounds inserted in the tables' };
   }
 
-  async findAll(gameDate: string, leagueId: string) {
+  async findAll(gameDate: string, leagueId: string, userId: string) {
     let firstDate = moment(new Date());
     if (gameDate) {
       const newDate =
@@ -100,6 +103,10 @@ export class RoundsService {
         break;
     }
 
+    const betsUser = await this.betRoundRepository.find({where: {
+      userId,
+    }});
+
     const rounds = await this.roundRepository
       .createQueryBuilder('round')
       .innerJoinAndSelect(
@@ -119,7 +126,7 @@ export class RoundsService {
       .where(`round.leagueId = ${leagueId}`)
       .getRawMany();
 
-    const response = [];
+    const response = [];            
 
     rounds.forEach((item) => {
       const secondDate = item.dateRound;
@@ -127,17 +134,27 @@ export class RoundsService {
 
       if (Math.floor(timeDifference.asDays()) < 0) {
         if (Math.abs(Math.floor(timeDifference.asDays())) <= difference) {
+          
+          betsUser.forEach(element => {
+            if(element.matchId == item.matchId) {
+              item.awayTeamScoreBet = element.awayTeamScore;
+              item.homeTeamScoreBet = element.homeTeamScore;
+            }        
+          });
+
+          item.hoursToStart = Math.abs(Math.floor(timeDifference.asHours()));
+          
           response.push(item);
         }
       }
     });
 
-    return response;
+    return response
   }
 
   async findAllBet(id: string, leagueId: string, userId: string) {
-    const bet = await this.betLeftOneRepository.findOne({
-      where: { round: id, userId: userId },
+    const bet = await this.betLeftOneRepository.find({
+      where: { userId, leagueId },
     });
 
     const rounds = await this.roundRepository
@@ -161,10 +178,10 @@ export class RoundsService {
 
     rounds.forEach((item) => {
       if(bet) {
-        item.homeTeamSelected =
-        item.homeTeamId == bet.winnerTeamId ? true : false;
-        item.awayTeamSelected =
-        item.awayTeamId == bet.winnerTeamId ? true : false;
+        bet.forEach((betzin) => {
+          item.homeTeamSelected = item.homeTeamSelected ? item.homeTeamSelected : item.homeTeamId == betzin.winnerTeamId ? true : false;
+          item.awayTeamSelected = item.awayTeamSelected ? item.awayTeamSelected : item.awayTeamId == betzin.winnerTeamId ? true : false;
+        });
       }
     });
 
