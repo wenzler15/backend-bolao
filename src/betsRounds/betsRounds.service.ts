@@ -63,7 +63,7 @@ export class BetsRoundsService {
     // } else {
     //   return { message: 'Payment not found!' };
     // }
-  }
+  // }
 
   async adminAprove(body: AdminAproveEntity) {
     const { id } = body;
