@@ -17,7 +17,7 @@ export class LeaguesService {
 
     try {
       const response = await axios.get(
-        `https://api.football-data.org/v2/competitions?plan=TIER_ONE`,
+        `https://api.football-data.org/v2/competitions`,
         {
           headers: {
             'X-Auth-Token': token,
@@ -63,7 +63,7 @@ export class LeaguesService {
 
     try {
       const response = await axios.get(
-        `https://api.football-data.org/v2/competitions?plan=TIER_ONE`,
+        `https://api.football-data.org/v2/competitions`,
         {
           headers: {
             'X-Auth-Token': token,

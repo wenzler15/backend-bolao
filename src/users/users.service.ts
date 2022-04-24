@@ -1,11 +1,14 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable prettier/prettier */
 import { SendGridService } from '@anchan828/nest-sendgrid';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Res } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { response } from 'express';
 import { BetOneLeftEntity } from 'src/betsOneLeft/models/betOnelLeft.entity';
 import { BetRoundEntity } from 'src/betsRounds/models/betRounds.entity';
 import { PaymentEntity } from 'src/payment/models/payment.entity';
+import { PremiumEntity } from 'src/premium/models/premium.entity';
+import { RoundEntity } from 'src/rounds/models/round.entity';
 import { Repository } from 'typeorm';
 import { AuthEntity } from './models/auth.entity';
 import { ResetPasswordEntity } from './models/resetPassword.entity';
@@ -22,6 +25,14 @@ export class UsersService {
     private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(PaymentEntity)
     private readonly paymentRepository: Repository<PaymentEntity>,
+    @InjectRepository(BetOneLeftEntity)
+    private readonly betOneLeftRepository: Repository<BetOneLeftEntity>,
+    @InjectRepository(BetRoundEntity)
+    private readonly betRoundRepository: Repository<BetOneLeftEntity>,
+    @InjectRepository(PremiumEntity)
+    private readonly premiumRepository: Repository<PremiumEntity>,
+    @InjectRepository(RoundEntity)
+    private readonly roundRepository: Repository<RoundEntity>,
     private readonly sendGird: SendGridService) {}
 
   async create(user: User) {
@@ -105,7 +116,11 @@ export class UsersService {
 
     user.password = undefined;
 
-    return {message: "User Logged", token: this.generateToken({id: user.id})};
+    return {
+      message: "User Logged", 
+      token: this.generateToken({id: user.id}),
+      user: user
+    };
   }
 
   async forgotPassword(email: string) {
@@ -169,32 +184,165 @@ export class UsersService {
     const user = await this.userRepository.findOne({ where: {email}});
     if(body.facebook_token) {
       if(body.facebook_token === user.facebookToken) {
-        return {message: "Correct token!"}
+        return {
+          message: "Correct token!",
+          user: user
+        }
       }
       return {message: "Incorrect token!"}
     } else {
       if(body.google_token === user.googleToken) {
-        return {message: "Correct token!"}
+        return {
+          message: "Correct token!",
+          user: user
+        }
       }
       return {message: "Incorrect token!"}
     } 
   }
 
-  async getRanking() {
-    const response = await this.userRepository.find({
-      select: ["name", "favoriteTeam", "points"],
-      order: {
-        points: "DESC"
-      }
-    });
+  async historyBets(id: string) {
+    const betsLeftOne = await this.betOneLeftRepository
+    .createQueryBuilder('betOneLeft')
+    .leftJoinAndSelect('team', 'winnerTeam', 'winnerTeam.teamId = betOneLeft.winnerTeamId')
+    .innerJoinAndSelect('round', 'round', 'round.matchId = betOneLeft.matchId')
+    .innerJoinAndSelect(
+      'team',
+      'homeTeam',
+      'homeTeam.teamId = round.homeTeamId',
+    )
+    .innerJoinAndSelect(
+      'team',
+      'awayTeam',
+      'awayTeam.teamId = round.awayTeamId',
+    )
+    .select(['betOneLeft.userId, betOneLeft.life, betOneLeft.matchId, betOneLeft.round, betOneLeft.leagueId, betOneLeft.status , awayTeam.teamEmblemUrl AS "awayTeamEmblemUrl", awayTeam.teamName AS "awayTeamName", homeTeam.teamEmblemUrl AS "homeTeamEmblemUrl", homeTeam.teamName AS "homeTeamName", winnerTeam.teamName as "winnerTeam"'])
+    .orderBy('betOneLeft.createdAt', 'DESC')
+    .where(`betOneLeft.userId = ${id}`)
+    .getRawMany();
 
-    response.forEach((item) => {
-      item.password = undefined;
-      item.passwordResetExpires = undefined;
-      item.passwordResetToken = undefined;
+    const betsRound = await this.betRoundRepository
+    .createQueryBuilder('betRound')
+    .innerJoinAndSelect('team', 'winnerTeam', 'winnerTeam.teamId = betRound.winnerTeam')
+    .innerJoinAndSelect('round', 'round', 'round.matchId = betRound.matchId')
+    .innerJoinAndSelect(
+      'team',
+      'homeTeam',
+      'homeTeam.teamId = round.homeTeamId',
+    )
+    .innerJoinAndSelect(
+      'team',
+      'awayTeam',
+      'awayTeam.teamId = round.awayTeamId',
+    )
+    .select(['betRound.userId, betRound.matchId, betRound.round, betRound.homeTeamScore, betRound.awayTeamScore , awayTeam.teamEmblemUrl AS "awayTeamEmblemUrl", awayTeam.teamName AS "awayTeamName", homeTeam.teamEmblemUrl AS "homeTeamEmblemUrl", homeTeam.teamName AS "homeTeamName", winnerTeam.teamName as "winnerTeam"'])
+    .orderBy('betRound.createdAt', 'DESC')
+    .where(`betRound.userId = ${id}`)
+    .getRawMany();
+
+    const user = await this.userRepository.find({ 
+      where: { id: id },
     })
 
-    return response;
+    user[0].password = undefined;
+    user[0].passwordResetExpires = undefined;
+    user[0].passwordResetToken = undefined;
+
+    return {
+      user: user,
+      betsLeftOne: betsLeftOne,
+      betsRound: betsRound
+    };
+  }
+
+  async getRanking(id: number, league: number, round: number) {
+    let response = [];
+
+    if (round) {
+      const premium = await this.premiumRepository.findOne({
+        where: {
+          leagueId: league,
+          round,
+          gameMode: 'semanal'
+        }
+      });
+
+      const premiums = {
+        firstPlacePremium: premium.firstPlacePremium,
+        secondPlacePremium: premium.secondPlacePremium,
+        thirdPlacePremium: premium.thirdPlacePremium
+      }      
+
+      response = await this.userRepository.find({
+        select: ["name", "favoriteTeam", "points", "id"],
+        order: {
+          points: "DESC"
+        }
+      });
+
+    let userRanking = [];
+
+    response.forEach((item, index) => {     
+        if(item.id == id) {
+          userRanking.push(item);
+        }
+      
+      item.position = index + 1;
+    })
+
+    const respUser = {
+      userRanking, 
+      generalRanking: response,
+      premium: premiums
+    }
+
+    return respUser;
+    } else {
+      const premium = await this.premiumRepository.findOne({
+        where: {
+          leagueId: league,
+          gameMode: 'resta 1'
+        }
+      });
+
+      const premiums = {
+        firstPlacePremium: premium.firstPlacePremium,
+        secondPlacePremium: premium.secondPlacePremium,
+        thirdPlacePremium: premium.thirdPlacePremium
+      }  
+
+      response = await this.betOneLeftRepository
+      .createQueryBuilder("betLeftOne")
+      .innerJoinAndSelect("user", "user", 'user.id = betLeftOne.userId')
+      .innerJoinAndSelect("round", 'round', 'round.matchId = betLeftOne.matchId')
+      .select(["betLeftOne.userId, betLeftOne.life, betLeftOne.matchId, user.name, user.favoriteTeam, round.leagueId"])
+      // .groupBy("betLeftOne.userId")
+      .orderBy("betLeftOne.life", "DESC")
+      .getRawMany();
+      
+      let userRanking = [];
+      let generalRanking = [];
+
+      response.forEach( async (item, index) => {        
+        if(item.leagueId == league) {
+          if(item.userId == id) {
+            userRanking.push(item);
+          }
+          
+          item.position = index + 1;
+          generalRanking.push(item);
+        }
+      })
+  
+  
+      const respUser = {
+        userRanking, 
+        generalRanking: generalRanking,
+        premium: premiums
+      }
+  
+      return respUser;
+     } 
   }
 
   async resetPassword(body: ResetPasswordEntity) {

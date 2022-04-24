@@ -10,10 +10,14 @@ import { BetsRoundsModule } from './betsRounds/betsRounds.module';
 import { LeaguesModule } from './leagues/leagues.module';
 import { NewsModule } from './news/news.module';
 import { PaymentModule } from './payment/payment.module';
+import { NotificationsModule } from './notifications/notifications.module';
+import { ScheduleModule } from "@nestjs/schedule";
+import { PremiumModule } from './premium/premium.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    ScheduleModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.POSTGRES_HOST,
@@ -35,6 +39,8 @@ import { PaymentModule } from './payment/payment.module';
     LeaguesModule,
     NewsModule,
     PaymentModule,
+    NotificationsModule,
+    PremiumModule,
   ],
   controllers: [],
   providers: [],

@@ -7,6 +7,8 @@ import { BetOneLeft } from './models/betOneLeft.interface';
 import { AdminAproveEntity } from './models/adminAprove.entity';
 import { RoundEntity } from 'src/rounds/models/round.entity';
 import { PaymentEntity } from 'src/payment/models/payment.entity';
+import { UserEntity } from 'src/users/models/user.entity';
+import { NotificationEntity } from 'src/notifications/models/notifications.entity';
 const moment = require('moment');
 @Injectable()
 export class BetsOneLeftService {
@@ -17,12 +19,18 @@ export class BetsOneLeftService {
     private readonly roundsRepository: Repository<RoundEntity>,
     @InjectRepository(PaymentEntity)
     private readonly paymentRepository: Repository<PaymentEntity>,
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+    @InjectRepository(NotificationEntity)
+    private readonly notificationRepository: Repository<NotificationEntity>,
   ) {}
 
   async create(betOneLeft: BetOneLeft) {
-    const { userId, matchId } = betOneLeft;
+    const { userId, matchId, winnerTeamId } = betOneLeft;
 
     const rounds = await this.roundsRepository.find({ matchId });
+
+    betOneLeft.leagueId = rounds[0].leagueId;
 
     const payment = await this.paymentRepository.find({
       where: {
@@ -32,46 +40,63 @@ export class BetsOneLeftService {
     });
 
     // if (payment[0]) {
-      // if (payment[0].status === 'aprovado' && payment[0].gameMode === 2 || payment[0].gameMode === 3) {
-        const betLeftOneExists = await this.betOneLeftRepository.findOne({
-          userId,
-          matchId,
-        });
+    // if (payment[0].status === 'aprovado' && payment[0].gameMode === 2 || payment[0].gameMode === 3) {
+    const betLeftOneExists = await this.betOneLeftRepository.findOne({
+      userId,
+      round: betOneLeft.round,
+      leagueId: betOneLeft.leagueId,
+    });
 
-        if (betLeftOneExists)
-          return { message: 'This user has already betted in this match!' };
+    if (betLeftOneExists) {
+      const response = await this.betOneLeftRepository.save({
+        ...betLeftOneExists,
+        ...betOneLeft,
+      });
 
-        const lastBet = await this.betOneLeftRepository.findOne({
-          where: { userId },
-          order: { createdAt: 'DESC' },
-        });
+      return { message: 'Aposta atualizada com sucesso', bet: response };
+    }
 
-        if (lastBet && lastBet.life === 0)
-        return { message: "This user don't have more lifes!" };
-        
-        const round = await this.roundsRepository.findOne({ matchId: matchId });
-        
-        if (moment().utc() < round.dateRoundLocked) {
-          return { message: 'Bet round locked' };
-        } else { 
-          
-          if (!lastBet && rounds[0].round >= 7) {
-            betOneLeft.life = 2;
-            const response = await this.betOneLeftRepository.save(betOneLeft);
-            
-            return { message: 'Bet left one created', betLeftOne: response };
-          } else {            
-            const response = await this.betOneLeftRepository.save(betOneLeft);
-            
-            return { message: 'Bet left one created', betLeftOne: response };
-          }
+    const lastBet = await this.betOneLeftRepository.findOne({
+      where: { userId },
+      order: { createdAt: 'DESC' },
+    });
 
-        }
-      // } else if (payment[0].status === 'processando') {
-      //   return { message: 'Processing payment!' };
-      // } else {
-      //   return { message: 'Paymente denied!' };
-      // }
+    if (lastBet && lastBet.life === 0)
+      return { message: "This user don't have more lifes!" };
+
+    const round = await this.roundsRepository.findOne({ matchId: matchId });
+
+    const betLeftOneTeamExists = await this.betOneLeftRepository.findOne({
+      where: { userId, winnerTeamId },
+    });
+
+    if (betLeftOneTeamExists)
+      return {
+        message:
+          'Bet already placed on this team, please bet on another team to win',
+      };
+
+    betOneLeft.round = rounds[0].round;
+
+    if (moment().utc() > round.dateRoundLocked) {
+      return { message: 'Bet round locked' };
+    } else {
+      if (!lastBet && rounds[0].round >= 7) {
+        betOneLeft.life = 2;
+        const response = await this.betOneLeftRepository.save(betOneLeft);
+
+        return { message: 'Bet left one created', betLeftOne: response };
+      } else {
+        const response = await this.betOneLeftRepository.save(betOneLeft);
+
+        return { message: 'Bet left one created', betLeftOne: response };
+      }
+    }
+    // } else if (payment[0].status === 'processando') {
+    //   return { message: 'Processing payment!' };
+    // } else {
+    //   return { message: 'Paymente denied!' };
+    // }
     // } else {
     //   return { message: 'Payment not found!' };
     // }
@@ -80,14 +105,24 @@ export class BetsOneLeftService {
   async adminAprove(body: AdminAproveEntity) {
     const { id } = body;
     let winner = 0;
-    const bet = await this.betOneLeftRepository.findOne({ where: { id } });
+    
+    const bet = await this.betOneLeftRepository.findOne({ id });
 
     if (!bet) return { message: 'Bet not found!' };
 
-    if (bet.status) return { message: 'Bet has already been updated!' };
+    if (bet.status === true) return { message: 'Bet has already been updated!' };
 
     const round = await this.roundsRepository.findOne({ matchId: bet.matchId });
     const betAtt = bet;
+
+    const notification = {
+      userId: bet.userId,
+      read: 0,
+      message: 'Jogo finalizado!',
+      gameMode: 'Resta 1',
+    };
+
+    await this.notificationRepository.save(notification);
 
     if (round.awayTeamScore > round.homeTeamScore) {
       winner = round.awayTeamId;
@@ -97,12 +132,32 @@ export class BetsOneLeftService {
       winner = 0;
     }
 
-    if (winner !== bet.winnerTeam) {
+    if (winner !== bet.winnerTeamId) {
       betAtt.life -= 1;
+    } else {
+      const user = await this.userRepository.findOne({
+        where: { id: bet.userId },
+      });
+      let newPoints = user;
+      newPoints.winsNumberLeftOne += 1;
+
+      await this.userRepository.save({
+        ...user,
+        ...newPoints,
+      });
+
+      const notification = {
+        userId: bet.userId,
+        read: 0,
+        message: 'Parabéns você acertou o vencedor do jogo!',
+        gameMode: 'Resta 1',
+      };
+
+      await this.notificationRepository.save(notification);
     }
 
     betAtt.status = true;
-    betAtt.winnerTeam = winner;
+    betAtt.winnerTeamId = winner;
 
     await this.betOneLeftRepository.save({
       ...bet,
@@ -112,8 +167,19 @@ export class BetsOneLeftService {
     return { message: 'Bet updated!' };
   }
 
-  findAll() {
-    return this.betOneLeftRepository.find();
+  async findAll() {
+    const response = await this.betOneLeftRepository
+    .createQueryBuilder("betOneLeft")
+    .innerJoinAndSelect("team", "winnerTeam", "winnerTeam.teamId = betOneLeft.winnerTeamId")
+    .innerJoinAndSelect("round", "round", "round.matchId = betOneLeft.matchId")
+    .innerJoinAndSelect("team", "awayTeam", "awayTeam.teamId = round.awayTeamId")
+    .innerJoinAndSelect("team", "homeTeam", "homeTeam.teamId = round.homeTeamId")
+    .innerJoinAndSelect("league", "league", "league.leagueId = betOneLeft.leagueId")
+    .select(['betOneLeft.userId, betOneLeft.round, betOneLeft.id, betOneLeft.life, league.leagueName as "leagueName", homeTeam.teamName as "homeTeam", awayTeam.teamName as "awayTeam", winnerTeam.teamName as "winningTeam"'])
+    .where("betOneLeft.status = false")
+    .getRawMany();
+
+    return response;
   }
 
   findOne(id: string) {
@@ -146,5 +212,55 @@ export class BetsOneLeftService {
     });
 
     return response;
+  }
+
+  async getAllWinningBet() {
+    const response = await this.betOneLeftRepository
+      .createQueryBuilder('betOneLeft')
+      .innerJoinAndSelect('user', 'user', 'user.id = betOneLeft.userId')
+      .innerJoinAndSelect(
+        'round',
+        'round',
+        'betOneLeft.matchId = round.matchId',
+      )
+      .innerJoinAndSelect(
+        'team',
+        'teamHome',
+        'teamHome.teamId = round.homeTeamId',
+      )
+      .innerJoinAndSelect(
+        'team',
+        'teamAway',
+        'teamAway.teamId = round.awayTeamId',
+      )
+      .innerJoinAndSelect(
+        'team',
+        'teamWinner',
+        'teamWinner.teamId = betOneLeft.winnerTeamId',
+      )
+      .select([
+        'betOneLeft.userId, user.name, user.lastName, betOneLeft.id, teamHome.teamName AS "TimeDaCasa", teamAway.teamName AS "TimeVisitante", teamWinner.teamName AS "TimeVencedor"',
+      ])
+      .where('betOneLeft.status = true')
+      .orderBy('betOneLeft.createdAt', 'ASC')
+      .getRawMany();
+
+    return response;
+  }
+
+  async getBet(id: string) {
+    const response = await this.betOneLeftRepository
+      .createQueryBuilder('betOneLeft')
+      .innerJoinAndSelect(
+        'team',
+        'team',
+        'team.teamId = betOneLeft.winnerTeamId',
+      )
+      .select(['team.teamName, betOneLeft.matchId, betOneLeft.life'])
+      .orderBy('betOneLeft.id', 'DESC')
+      .where(`betOneLeft.userId = ${id}`)
+      .getRawOne();
+
+    return { message: 'Last leftOne user bet!', response: response };
   }
 }

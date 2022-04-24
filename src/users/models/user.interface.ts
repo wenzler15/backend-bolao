@@ -3,6 +3,12 @@ export interface User {
     id?: number;
     email?: string;
     name?: string;
+    pix?: string;
+    bankName?: string;
+    position?: number;
+    agencyNumber?: string;
+    accountNumber?: string;
+    accountType?: string;
     lastName?: string;
     codeArea?: string;
     phone?: string;
@@ -16,6 +22,9 @@ export interface User {
     createdAt?: Date;
     facebookToken?: string;
     googleToken?: string;
+    winsNumberLeftOne?: number;
+    winsNumber?: number;
+    profileUrl?: string;
     passwordResetToken?: string;
     passwordResetExpires?: Date;
 }

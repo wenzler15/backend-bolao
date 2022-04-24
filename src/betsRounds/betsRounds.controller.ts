@@ -7,11 +7,22 @@ import {
   Body,
   Patch,
   Param,
+  Headers,
   Delete,
 } from '@nestjs/common';
 import { BetRound } from './models/betRounds.interface';
 import { BetsRoundsService } from './betsRounds.service';
 import { AdminAproveEntity } from './models/adminAprove.entity';
+
+@Controller('userBet')
+export class UserBetController{
+  constructor(private readonly betsRoundService: BetsRoundsService) {}
+
+  @Get(':id')
+  getBet(@Param('id') id: string) {
+    return this.betsRoundService.getBet(id);
+  }
+}
 
 @Controller('betsRound/admin')
 export class BetsRoundsAdminController {
@@ -26,6 +37,11 @@ export class BetsRoundsAdminController {
 @Controller('winningBetsRound')
 export class WinningBetController {
   constructor(private readonly betsRoundService: BetsRoundsService) {}
+
+  @Get()
+  getAllWinningBet() {
+    return this.betsRoundService.getAllWinningBet();
+  }
 
   @Get(':id')
   winningBet(@Param('id') id: string) {

@@ -4,4 +4,5 @@ export interface Team {
   leagueId?: number;
   teamId?: number;
   teamName?: string;
+  teamEmblemUrl?: string;
 }

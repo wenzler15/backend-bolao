@@ -4,5 +4,6 @@ export interface News {
   teamId?: number;
   title?: string;
   description?: string;
+  coverUrl?: string;
   url?: string;
 }

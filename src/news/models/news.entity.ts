@@ -15,6 +15,9 @@ export class NewsEntity {
   @Column({ default: '' })
   description: string;
 
+  @Column({ default: ''})
+  coverUrl: string;
+
   @Column({ default: '' })
   url: string;
 

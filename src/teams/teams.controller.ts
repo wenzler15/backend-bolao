@@ -8,6 +8,7 @@ import {
   Patch,
   Param,
   Delete,
+  Headers,
 } from '@nestjs/common';
 import { Team } from './models/team.interface';
 import { TeamsService } from './teams.service';
@@ -25,8 +26,8 @@ export class TeamsController {
   }
 
   @Get()
-  findAll() {
-    return this.teamsService.findAll();
+  findAll(@Headers('teamName') teamName: string) {
+    return this.teamsService.findAll(teamName);
   }
 
   @Get(':id')
@@ -34,9 +35,9 @@ export class TeamsController {
     return this.teamsService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: any) {
-    return this.teamsService.update(id, updateUserDto);
+  @Patch(':league')
+  update(@Param('league') league: number, @Body() updateTeamDto: Team) {
+    return this.teamsService.update(league, updateTeamDto);
   }
 
   @Delete(':id')

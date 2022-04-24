@@ -9,6 +9,9 @@ export class BetOneLeftEntity {
   @Column({ type: 'integer', default: 0 })
   userId: number;
 
+  @Column({ type: 'integer', default: 0 })
+  round: number;
+
   @Column({ type: 'integer', default: 3 })
   life: number;
   
@@ -16,7 +19,10 @@ export class BetOneLeftEntity {
   matchId: number;
 
   @Column({ type: 'integer', default: 0 })
-  winnerTeam: number;
+  leagueId: number;  
+
+  @Column({ type: 'integer', default: 0 })
+  winnerTeamId: number;
 
   @Column({ default: false })
   status: boolean;
