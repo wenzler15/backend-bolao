@@ -268,9 +268,9 @@ export class UsersService {
       });
 
       const premiums = {
-        firstPlacePremium: premium.firstPlacePremium,
-        secondPlacePremium: premium.secondPlacePremium,
-        thirdPlacePremium: premium.thirdPlacePremium
+        firstPlacePremium: premium ? premium.firstPlacePremium : '',
+        secondPlacePremium: premium ? premium.secondPlacePremium : '',
+        thirdPlacePremium: premium ? premium.thirdPlacePremium : ''
       }      
 
       response = await this.userRepository.find({
@@ -306,9 +306,9 @@ export class UsersService {
       });
 
       const premiums = {
-        firstPlacePremium: premium.firstPlacePremium,
-        secondPlacePremium: premium.secondPlacePremium,
-        thirdPlacePremium: premium.thirdPlacePremium
+        firstPlacePremium: premium ? premium.firstPlacePremium : '',
+        secondPlacePremium: premium ? premium.secondPlacePremium : '',
+        thirdPlacePremium: premium ? premium.thirdPlacePremium : ''
       }  
 
       response = await this.betOneLeftRepository
