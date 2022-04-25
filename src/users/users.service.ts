@@ -9,6 +9,7 @@ import { BetRoundEntity } from 'src/betsRounds/models/betRounds.entity';
 import { PaymentEntity } from 'src/payment/models/payment.entity';
 import { PremiumEntity } from 'src/premium/models/premium.entity';
 import { RoundEntity } from 'src/rounds/models/round.entity';
+import { TeamEntity } from 'src/teams/models/team.entity';
 import { Repository } from 'typeorm';
 import { AuthEntity } from './models/auth.entity';
 import { ResetPasswordEntity } from './models/resetPassword.entity';
@@ -33,6 +34,8 @@ export class UsersService {
     private readonly premiumRepository: Repository<PremiumEntity>,
     @InjectRepository(RoundEntity)
     private readonly roundRepository: Repository<RoundEntity>,
+    @InjectRepository(TeamEntity)
+    private readonly teamRepository: Repository<TeamEntity>,
     private readonly sendGird: SendGridService) {}
 
   async create(user: User) {
@@ -108,6 +111,15 @@ export class UsersService {
 
     const user = await this.userRepository.findOne({ where: {email}});
 
+    const team = await this.teamRepository.findOne({
+      where: { teamId: user.favoriteTeam },
+    });
+
+    team.id = undefined;
+    team.leagueId = undefined;
+    team.createdAt = undefined;
+    user.favoriteTeam = undefined;
+
     if(!user)
       return {message: "User not found"};
 
@@ -119,7 +131,8 @@ export class UsersService {
     return {
       message: "User Logged", 
       token: this.generateToken({id: user.id}),
-      user: user
+      user: user,
+      team: team
     };
   }
 

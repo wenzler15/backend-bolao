@@ -15,54 +15,54 @@ export class PaymentService {
   async create(createPaymentDto: any) {
     const id = createPaymentDto.userId;
 
-    const userExists = await this.usersRepository.findOne({ where: {id}}); 
+    const userExists = await this.usersRepository.findOne({ where: { id } });
 
-    if(!userExists) 
-      return {message: "User not found!"}
+    if (!userExists) return { message: 'User not found!' };
 
-    const mercadopago = require ('mercadopago');
+    const mercadopago = require('mercadopago');
 
     mercadopago.configure({
-      access_token: process.env.ACCESS_TOKEN
+      access_token: process.env.ACCESS_TOKEN,
     });
 
-    let preference = {
+    const preference = {
       items: [
         {
           title: createPaymentDto.title,
           unit_price: createPaymentDto.price,
           quantity: 1,
-        }
-      ]
+        },
+      ],
     };
 
-    let URL = "";
+    let URL = '';
 
-    await mercadopago.preferences.create(preference)
-    .then(function(response){
-      URL = response.body.init_point;
-    }).catch(function(error){
-      console.log(error);
-    });
+    await mercadopago.preferences
+      .create(preference)
+      .then(function (response) {
+        URL = response.body.init_point;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
-    createPaymentDto.status = "Processando pagamento";
+    createPaymentDto.status = 'Processando pagamento';
 
     const response = await this.paymentRepository.save(createPaymentDto);
 
-    return {message: "Payment created!", payment_url: URL, data: response};
+    return { message: 'Payment created!', payment_url: URL, data: response };
   }
 
   async update(id: number, updatePaymentDto: any) {
-    const data = await this.paymentRepository.findOne({id});
+    const data = await this.paymentRepository.findOne({ id });
 
-    if(!data) 
-      return {message: "Payment not found!"}
+    if (!data) return { message: 'Payment not found!' };
 
     await this.paymentRepository.save({
       ...data,
-      ...updatePaymentDto
+      ...updatePaymentDto,
     });
 
-    return {message: "Payment updated!"}
+    return { message: 'Payment updated!' };
   }
 }

@@ -10,6 +10,7 @@ export interface User {
     accountNumber?: string;
     accountType?: string;
     lastName?: string;
+    nickname?: string;
     codeArea?: string;
     phone?: string;
     cpf?: string;

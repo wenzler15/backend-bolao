@@ -103,9 +103,11 @@ export class RoundsService {
         break;
     }
 
-    const betsUser = await this.betRoundRepository.find({where: {
-      userId,
-    }});
+    const betsUser = await this.betRoundRepository.find({
+      where: {
+        userId,
+      },
+    });
 
     const rounds = await this.roundRepository
       .createQueryBuilder('round')
@@ -126,7 +128,7 @@ export class RoundsService {
       .where(`round.leagueId = ${leagueId}`)
       .getRawMany();
 
-    const response = [];            
+    const response = [];
 
     rounds.forEach((item) => {
       const secondDate = item.dateRound;
@@ -134,22 +136,21 @@ export class RoundsService {
 
       if (Math.floor(timeDifference.asDays()) < 0) {
         if (Math.abs(Math.floor(timeDifference.asDays())) <= difference) {
-          
-          betsUser.forEach(element => {
-            if(element.matchId == item.matchId) {
+          betsUser.forEach((element) => {
+            if (element.matchId == item.matchId) {
               item.awayTeamScoreBet = element.awayTeamScore;
               item.homeTeamScoreBet = element.homeTeamScore;
-            }        
+            }
           });
 
           item.hoursToStart = Math.abs(Math.floor(timeDifference.asHours()));
-          
+
           response.push(item);
         }
       }
     });
 
-    return response
+    return response;
   }
 
   async findAllBet(id: string, leagueId: string, userId: string) {
@@ -177,10 +178,18 @@ export class RoundsService {
       .getRawMany();
 
     rounds.forEach((item) => {
-      if(bet) {
+      if (bet) {
         bet.forEach((betzin) => {
-          item.homeTeamSelected = item.homeTeamSelected ? item.homeTeamSelected : item.homeTeamId == betzin.winnerTeamId ? true : false;
-          item.awayTeamSelected = item.awayTeamSelected ? item.awayTeamSelected : item.awayTeamId == betzin.winnerTeamId ? true : false;
+          item.homeTeamSelected = item.homeTeamSelected
+            ? item.homeTeamSelected
+            : item.homeTeamId == betzin.winnerTeamId
+            ? true
+            : false;
+          item.awayTeamSelected = item.awayTeamSelected
+            ? item.awayTeamSelected
+            : item.awayTeamId == betzin.winnerTeamId
+            ? true
+            : false;
         });
       }
     });

@@ -21,6 +21,9 @@ export class UserEntity {
   lastName: string;
 
   @Column({ default: '' })
+  nickname: string;
+
+  @Column({ default: '' })
   pix: string;
 
   @Column({ default: '' })

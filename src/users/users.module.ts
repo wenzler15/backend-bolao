@@ -1,3 +1,4 @@
+import { TeamEntity } from './../teams/models/team.entity';
 import { Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import {
@@ -26,6 +27,7 @@ import { PremiumEntity } from 'src/premium/models/premium.entity';
       BetRoundEntity,
       RoundEntity,
       PremiumEntity,
+      TeamEntity,
     ]),
   ],
   controllers: [
