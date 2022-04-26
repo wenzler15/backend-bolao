@@ -26,6 +26,9 @@ export class PaymentEntity {
     @Column({ type: 'numeric', default: 0})
     price: number;
 
+    @Column({ default: ''})
+    period: string;
+
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
     createdAt: Date;
 }

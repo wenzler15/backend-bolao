@@ -40,7 +40,16 @@ export class BetsOneLeftService {
     });
 
     // if (payment[0]) {
-    // if (payment[0].status === 'aprovado' && payment[0].gameMode === 2 || payment[0].gameMode === 3) {
+    //   if (
+    //     (payment[0].status === 'aprovado' && payment[0].gameMode === 2) ||
+    //     payment[0].gameMode === 3
+    //   ) {
+    //     if (
+    //       (payment[0].period === 'week' &&
+    //         payment[0].round === betOneLeft.round) ||
+    //       (payment[0].period === 'year' &&
+    //         payment[0].leagueId === rounds[0].leagueId)
+    //     ) {
     const betLeftOneExists = await this.betOneLeftRepository.findOne({
       userId,
       round: betOneLeft.round,
@@ -64,7 +73,9 @@ export class BetsOneLeftService {
     if (lastBet && lastBet.life === 0)
       return { message: "This user don't have more lifes!" };
 
-    const round = await this.roundsRepository.findOne({ matchId: matchId });
+    const round = await this.roundsRepository.findOne({
+      matchId: matchId,
+    });
 
     const betLeftOneTeamExists = await this.betOneLeftRepository.findOne({
       where: { userId, winnerTeamId },
@@ -92,11 +103,14 @@ export class BetsOneLeftService {
         return { message: 'Bet left one created', betLeftOne: response };
       }
     }
-    // } else if (payment[0].status === 'processando') {
-    //   return { message: 'Processing payment!' };
-    // } else {
-    //   return { message: 'Paymente denied!' };
-    // }
+    //     } else {
+    //       return { message: 'Could not procces the bet' };
+    //     }
+    //   } else if (payment[0].status === 'Processando pagamento') {
+    //     return { message: 'Processing payment!' };
+    //   } else {
+    //     return { message: 'Paymente denied!' };
+    //   }
     // } else {
     //   return { message: 'Payment not found!' };
     // }
@@ -105,12 +119,13 @@ export class BetsOneLeftService {
   async adminAprove(body: AdminAproveEntity) {
     const { id } = body;
     let winner = 0;
-    
+
     const bet = await this.betOneLeftRepository.findOne({ id });
 
     if (!bet) return { message: 'Bet not found!' };
 
-    if (bet.status === true) return { message: 'Bet has already been updated!' };
+    if (bet.status === true)
+      return { message: 'Bet has already been updated!' };
 
     const round = await this.roundsRepository.findOne({ matchId: bet.matchId });
     const betAtt = bet;
@@ -138,7 +153,7 @@ export class BetsOneLeftService {
       const user = await this.userRepository.findOne({
         where: { id: bet.userId },
       });
-      let newPoints = user;
+      const newPoints = user;
       newPoints.winsNumberLeftOne += 1;
 
       await this.userRepository.save({
@@ -169,15 +184,37 @@ export class BetsOneLeftService {
 
   async findAll() {
     const response = await this.betOneLeftRepository
-    .createQueryBuilder("betOneLeft")
-    .innerJoinAndSelect("team", "winnerTeam", "winnerTeam.teamId = betOneLeft.winnerTeamId")
-    .innerJoinAndSelect("round", "round", "round.matchId = betOneLeft.matchId")
-    .innerJoinAndSelect("team", "awayTeam", "awayTeam.teamId = round.awayTeamId")
-    .innerJoinAndSelect("team", "homeTeam", "homeTeam.teamId = round.homeTeamId")
-    .innerJoinAndSelect("league", "league", "league.leagueId = betOneLeft.leagueId")
-    .select(['betOneLeft.userId, betOneLeft.round, betOneLeft.id, betOneLeft.life, league.leagueName as "leagueName", homeTeam.teamName as "homeTeam", awayTeam.teamName as "awayTeam", winnerTeam.teamName as "winningTeam"'])
-    .where("betOneLeft.status = false")
-    .getRawMany();
+      .createQueryBuilder('betOneLeft')
+      .innerJoinAndSelect(
+        'team',
+        'winnerTeam',
+        'winnerTeam.teamId = betOneLeft.winnerTeamId',
+      )
+      .innerJoinAndSelect(
+        'round',
+        'round',
+        'round.matchId = betOneLeft.matchId',
+      )
+      .innerJoinAndSelect(
+        'team',
+        'awayTeam',
+        'awayTeam.teamId = round.awayTeamId',
+      )
+      .innerJoinAndSelect(
+        'team',
+        'homeTeam',
+        'homeTeam.teamId = round.homeTeamId',
+      )
+      .innerJoinAndSelect(
+        'league',
+        'league',
+        'league.leagueId = betOneLeft.leagueId',
+      )
+      .select([
+        'betOneLeft.userId, betOneLeft.round, betOneLeft.id, betOneLeft.life, league.leagueName as "leagueName", homeTeam.teamName as "homeTeam", awayTeam.teamName as "awayTeam", winnerTeam.teamName as "winningTeam"',
+      ])
+      .where('betOneLeft.status = false')
+      .getRawMany();
 
     return response;
   }

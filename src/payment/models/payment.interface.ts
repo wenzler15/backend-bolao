@@ -8,5 +8,6 @@ export interface Payment {
     title?: string;
     status?: string;
     price?: number;
+    period?: string;
     createdAt?: Date;
 }
