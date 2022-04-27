@@ -183,12 +183,13 @@ export class RoundsService {
           item.homeTeamSelected = item.homeTeamSelected
             ? item.homeTeamSelected
             : item.homeTeamId == betzin.winnerTeamId
-            ? true
+            ? betzin.round
             : false;
+
           item.awayTeamSelected = item.awayTeamSelected
             ? item.awayTeamSelected
             : item.awayTeamId == betzin.winnerTeamId
-            ? true
+            ? betzin.round
             : false;
         });
       }
