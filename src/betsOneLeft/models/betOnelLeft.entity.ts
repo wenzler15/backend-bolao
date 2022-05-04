@@ -14,12 +14,21 @@ export class BetOneLeftEntity {
 
   @Column({ type: 'integer', default: 3 })
   life: number;
-  
+
   @Column({ type: 'integer', default: 0 })
   matchId: number;
 
   @Column({ type: 'integer', default: 0 })
-  leagueId: number;  
+  wins: number;
+
+  @Column({ type: 'integer', default: 0 })
+  draws: number;
+
+  @Column({ type: 'integer', default: 0 })
+  awayTeamBet: number;
+
+  @Column({ type: 'integer', default: 0 })
+  leagueId: number;
 
   @Column({ type: 'integer', default: 0 })
   winnerTeamId: number;

@@ -130,6 +130,10 @@ export class BetsOneLeftService {
     const round = await this.roundsRepository.findOne({ matchId: bet.matchId });
     const betAtt = bet;
 
+    if (round.awayTeamId == betAtt.winnerTeamId) {
+      betAtt.awayTeamBet += 1;
+    }
+
     const notification = {
       userId: bet.userId,
       read: 0,
@@ -150,6 +154,12 @@ export class BetsOneLeftService {
     if (winner !== bet.winnerTeamId) {
       betAtt.life -= 1;
     } else {
+      if (winner == 0) {
+        betAtt.draws += 1;
+      } else {
+        betAtt.wins += 1;
+      }
+
       const user = await this.userRepository.findOne({
         where: { id: bet.userId },
       });
