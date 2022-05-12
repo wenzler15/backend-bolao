@@ -40,11 +40,25 @@ export class UsersService {
   ) {}
 
   async create(user: User) {
-    const { email, name, lastName } = user;
+    const { email, name, lastName, nickname, cpf } = user;
 
-    const userExists = await this.userRepository.findOne({ where: { email } });
+    const userExistsEmail = await this.userRepository.findOne({
+      where: { email },
+    });
 
-    if (userExists) return { message: 'User already exists' };
+    if (userExistsEmail) return { message: 'User email already exists' };
+
+    const userExistsCPF = await this.userRepository.findOne({
+      where: { cpf },
+    });
+
+    if (userExistsCPF) return { message: 'User CPF already exists' };
+
+    const userExistsNick = await this.userRepository.findOne({
+      where: { nickname },
+    });
+
+    if (userExistsNick) return { message: 'User nickname already exists' };
 
     const response = await this.userRepository.save(user);
 
