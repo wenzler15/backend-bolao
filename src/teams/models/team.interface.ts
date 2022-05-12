@@ -5,4 +5,5 @@ export interface Team {
   teamId?: number;
   teamName?: string;
   teamEmblemUrl?: string;
+  slug?: string;
 }
