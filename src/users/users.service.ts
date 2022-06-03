@@ -384,9 +384,16 @@ export class UsersService {
         }
       });
 
+      const filteredArray = generalRanking.filter((a) => {
+        return (
+          !this[JSON.stringify(a.userId)] &&
+          (this[JSON.stringify(a.userId)] = true)
+        );
+      }, Object.create(null));
+
       const respUser = {
         userRanking,
-        generalRanking: generalRanking,
+        generalRanking: filteredArray,
         premium: premiums,
       };
 
